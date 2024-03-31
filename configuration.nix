@@ -11,6 +11,11 @@
       # ./modules/neovim/neovim.nix
     ];
 
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable OpenGL
@@ -59,18 +64,18 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
-  fileSystems."/data" = 
-  {
-    device = "/dev/disk/by-partuuid/bcf874b7-02";
-    fsType = "ntfs-3g";
-    options = [ "rw" "uid=1000"];
-  };
-  fileSystems."/para" = 
-  {
-    device = "/dev/disk/by-partuuid/3275efc2-5142-4685-9bcc-ef930a9ed7ed";
-    fsType = "ntfs-3g";
-    options = [ "rw" "uid=1000"];
-  };
+  #fileSystems."/data" = 
+  #{
+  #  device = "/dev/disk/by-partuuid/bcf874b7-02";
+  #  fsType = "ntfs-3g";
+  #  options = [ "rw" "uid=1000"];
+  #};
+  #fileSystems."/para" = 
+  #{
+  #  device = "/dev/disk/by-partuuid/3275efc2-5142-4685-9bcc-ef930a9ed7ed";
+  #  fsType = "ntfs-3g";
+  #  options = [ "rw" "uid=1000"];
+  #};
   
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -105,7 +110,8 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
@@ -156,6 +162,12 @@
     ];
   };
 
+  
+  #fonts.packages = with pkgs; [ fira-code ];
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  ]; 
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -169,8 +181,24 @@
     zsh
     inputs.helix.packages."${pkgs.system}".helix
     keepass
+    nodejs
+    cmake
+    vulkan-tools-lunarg
+    vulkan-headers
+    wayland-scanner
+    pkg-config
+    wlroots
+    python3
+    pipx
+    obsidian
+    immersed-vr
+    clang-tools
   ];
   environment.variables.EDITOR = "neovim";
+
+
+
+  #boot.extraModulePackages = with config.boot.kernelPackages; [ uinput ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

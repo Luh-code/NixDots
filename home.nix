@@ -89,8 +89,13 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
-    neovim
+    #neovim
+    nixvim
     discord
+    steam
+    spotify
+    ninja
+    gcc
   ];
 
   #programs.neovim = {
@@ -103,8 +108,20 @@
   #};
 
   # basically copy the whole nvchad that is fetched from github to ~/.config/nvim
-  xdg.configFile."nvim/" = {
-    source = (pkgs.callPackage ./nvchad/default.nix{}).nvchad;
+  #xdg.configFile."nvim/" = {
+  #  source = (pkgs.callPackage ./nvchad/default.nix{}).nvchad;
+  #};
+
+  #nvchad = import ./packages/nvim/default.nix;
+  #nvchad{};
+  #nvchad = (pkgs.callPackage ./packages/nvim/default.nix{}).nvchad;
+
+  #home.file.".config/nvim" = {
+  #  source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/packages/nvim/nvchad";
+  #};
+
+  home.file.".config/hypr" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/packages/hypr";
   };
 
   # basic configuration of git, please change to your own
@@ -134,6 +151,10 @@
       shell.program = "zsh";
       env.TERM = "xterm-256color";
       font = {
+        normal= {
+	  family = "FiraCode Nerd Font Mono";
+	  style = "Regular";
+	};
         size = 11;
       };
       scrolling.multiplier = 5;
@@ -154,8 +175,8 @@
       k = "kubectl";
       urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
       urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-      update = "sudo nixos-rebuild switch";
-      la = "ls -lA";
+      update = "sudo nixos-rebuild switch --fast --impure --option eval-cache false";
+      la = "eza -lA";
     };
 
     oh-my-zsh = {

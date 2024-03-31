@@ -7,11 +7,20 @@
 
     helix.url = "github:helix-editor/helix/master";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     home-manager = {
       url = "github:nix-community/home-manager";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    #inputs.nixvim = {
+    #  url = "github:nix-community/nixvim";
+    #  # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+    #  # url = "github:nix-community/nixvim/nixos-23.05";
+
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
