@@ -1,12 +1,17 @@
 { config, pkgs, inputs, ... }:
 
+let 
+  home-manager-modules-path = ./../../modules/home-manager;
+  hmmp = home-manager-modules-path;
+in
 {
   imports = 
     [
       #./homeManagerModules.nix
-      home-manager-modules."nixvim/nixvim.nix"
+      #home-manager-modules."nixvim/nixvim.nix"
       #inputs.nixvim.homeManagerModules.nixvim
-
+      "${hmmp}/nixvim/nixvim.nix"
+      "${hmmp}/git/git.nix"
     ];
 
   #programs.nixvim.enable = true;
@@ -142,11 +147,11 @@
   #};
 
   # basic configuration of git, please change to your own
-  programs.git = {
-    enable = true;
-    userName = "Luh-code";
-    userEmail = "Lasse@hueffler.de";
-  };
+  #programs.git = {
+  #  enable = true;
+  #  userName = "Luh-code";
+  #  userEmail = "Lasse@hueffler.de";
+  #};
 
   # starship - an customizable prompt for any shell
   #programs.starship = {

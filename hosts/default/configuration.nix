@@ -12,7 +12,6 @@
 
       #inputs.nixvim.homeManagerModules.nixvim
       # ./modules/neovim/neovim.nix
-      ./home-manager-modules.nix
     ];
 
   #programs.hyprland = {
@@ -204,7 +203,7 @@
     immersed-vr
     clang-tools
   ];
-  environment.variables.EDITOR = "neovim";
+  #environment.variables.EDITOR = "neovim";
 
 
 

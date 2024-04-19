@@ -1,7 +1,7 @@
-{ path }:
+{ path, ... }:
 let
-  home-manager-modules-path = ./../../modules/home-manager-modules/;
+  home-manager-modules-path = ./../../modules/home-manager-modules;
 in
 {
-  home-manager-modules-path + path;
+  res = home-manager-modules-path + ( "/" + path );
 }
