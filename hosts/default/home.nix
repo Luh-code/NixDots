@@ -12,6 +12,8 @@ in
       #inputs.nixvim.homeManagerModules.nixvim
       "${hmmp}/nixvim/nixvim.nix"
       "${hmmp}/git/git.nix"
+      "${hmmp}/alacritty/default.nix"
+      "${hmmp}/zsh/default.nix"
     ];
 
   #programs.nixvim.enable = true;
@@ -166,53 +168,53 @@ in
   #};
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
-  programs.alacritty = {
-    enable = true;
-    # custom settings
-    settings = {
-      shell.program = "zsh";
-      env.TERM = "xterm-256color";
-      font = {
-        normal= {
-	  family = "FiraCode Nerd Font Mono";
-	  style = "Regular";
-	};
-        size = 11;
-      };
-      scrolling.multiplier = 5;
-      selection.save_to_clipboard = true;
-    };
-  };
+  #programs.alacritty = {
+  #  enable = true;
+  #  # custom settings
+  #  settings = {
+  #    shell.program = "zsh";
+  #    env.TERM = "xterm-256color";
+  #    font = {
+  #      normal= {
+	#  family = "FiraCode Nerd Font Mono";
+	#  style = "Regular";
+	#};
+  #      size = 11;
+  #    };
+  #    scrolling.multiplier = 5;
+  #    selection.save_to_clipboard = true;
+  #  };
+  #};
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    initExtra = ''
-      eval "$(zoxide init zsh --cmd cd)"
-      eval "$(sh /etc/nixos/tmux.sh)"
-    '';
+  #programs.zsh = {
+  #  enable = true;
+  #  enableCompletion = true;
+  #  initExtra = ''
+  #    eval "$(zoxide init zsh --cmd cd)"
+  #    eval "$(sh /etc/nixos/tmux.sh)"
+  #  '';
 
-    # set some aliases, feel free to add more or remove some
-    shellAliases = {
-      k = "kubectl";
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-      update = "sudo nixos-rebuild switch --fast --option eval-cache false";
-      la = "eza -lA";
-    };
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" "thefuck" ];
-      theme = "af-magic";
-    };
-    #zplug = {
-    #  enable = true;
-    #  plugins = [
-    #    { name = "zsh-users/zsh-autosuggestion"; }
-    #  ];
-    #};
-  };
+  #  # set some aliases, feel free to add more or remove some
+  #  shellAliases = {
+  #    k = "kubectl";
+  #    urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+  #    urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+  #    update = "sudo nixos-rebuild switch --fast --option eval-cache false";
+  #    la = "eza -lA";
+  #  };
+#
+#    oh-my-zsh = {
+#      enable = true;
+#      plugins = [ "git" "thefuck" ];
+#      theme = "af-magic";
+#    };
+#    #zplug = {
+#    #  enable = true;
+#    #  plugins = [
+#    #    { name = "zsh-users/zsh-autosuggestion"; }
+#    #  ];
+#    #};
+#  };
 
   programs.tmux = {
     enable = true;
