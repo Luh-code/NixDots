@@ -12,6 +12,7 @@
 
       #inputs.nixvim.homeManagerModules.nixvim
       # ./modules/neovim/neovim.nix
+      ./home-manager-modules.nix
     ];
 
   #programs.hyprland = {

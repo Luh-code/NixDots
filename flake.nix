@@ -11,8 +11,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    home-manager-modules.url = "./modules/home-manager";
-    nixos-modules.url = "./modules/nixos";
+    #home-manager-modules.url = "./modules/home-manager";
+    #nixos-modules.url = "./modules/nixos";
 
     nixvim = {
       url = "github:nix-community/nixvim";

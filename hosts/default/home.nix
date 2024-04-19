@@ -3,7 +3,8 @@
 {
   imports = 
     [
-      "${home-manager-modules}/nixvim/nixvim.nix"
+      #./homeManagerModules.nix
+      home-manager-modules."nixvim/nixvim.nix"
       #inputs.nixvim.homeManagerModules.nixvim
 
     ];
