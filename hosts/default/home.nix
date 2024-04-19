@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  imports = 
+    [
+      ./../../modules/home-manager/nixvim/nixvim.nix
+    ];
+
   home.username = "luh";
   home.homeDirectory = "/home/luh";
 
