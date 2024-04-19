@@ -1,0 +1,68 @@
+{
+  description = "The base config Flake";
+
+  inputs = {
+    # NixOS official package source, using the unstable branch here
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    helix.url = "github:helix-editor/helix/master";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    #inputs.nixvim = {
+    #  url = "github:nix-community/nixvim";
+    #  # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+    #  # url = "github:nix-community/nixvim/nixos-23.05";
+
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
+  };
+
+  outputs = { self, nixpkgs, home-manager, nixvim, ... }@inputs: {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        # Import the previous configuration.nix we used,
+        # so the old configuration file still takes effect
+        ./configuration.nix
+	#./modules/nixvim/nixvim.nix
+        { _module.args = { inherit inputs; }; }
+
+        home-manager.nixosModules.home-manager
+        {
+          #specialArgs = { inherit inputs; };
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          home-manager.users.luh = import ./home.nix;
+        }
+
+	#nixvim.nixosModules.nixvim
+      ];
+    };
+    #homeConfiguration.nixos = home-manager.lib.homeManagerConfiguration {
+    #  inherit nixpkgs;
+    #  extraSpecialArgs = { inherit inputs; };
+    #  modules = [
+    #    ./home.nix
+    #    ./modules/home/nixvim.nix
+    #    
+    #    nixvim.homeManagerModules.nixvim
+    #  ];
+
+      #nixvim.homeManagerModules.nixvim
+    #};
+  };
+}
+
