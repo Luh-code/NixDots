@@ -1,10 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = 
     [
-      ./../../modules/home-manager/nixvim/nixvim.nix
+      "${home-manager-modules}/nixvim/nixvim.nix"
+      #inputs.nixvim.homeManagerModules.nixvim
+
     ];
+
+  #programs.nixvim.enable = true;
 
   home.username = "luh";
   home.homeDirectory = "/home/luh";
@@ -216,6 +220,10 @@
     set -ag terminal-overrides ",xterm-256color:RGB"
     '';
   };
+
+  #inputs.nixvim.homeMangerModules.nixvim = {
+  #  enable = true;
+  #};
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
