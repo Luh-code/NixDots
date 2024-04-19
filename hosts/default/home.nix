@@ -132,9 +132,9 @@
   #  source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/packages/nvim/nvchad";
   #};
 
-  home.file.".config/hypr" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/packages/hypr";
-  };
+  #home.file.".config/hypr" = {
+  #  source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/packages/hypr";
+  #};
 
   # basic configuration of git, please change to your own
   programs.git = {
