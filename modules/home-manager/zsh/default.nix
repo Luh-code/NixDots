@@ -5,8 +5,8 @@
     enable = true;
     enableCompletion = true;
     initExtra = ''
-      eval "%(zoxide init zsh --cmd cd)"
-      eval "%(sh /etc/nixos/tmux.sh)"
+      eval "$(zoxide init zsh --cmd cd)"
+      eval "$(sh /etc/nixos/tmux.sh)"
     '';
 
     # set shell aliases
@@ -18,7 +18,7 @@
     # set up oh-my-zsh
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git", "thefuck" ];
+      plugins = [ "git" "thefuck" ];
       theme = "af-magic";
     };
   };
