@@ -7,17 +7,12 @@ in
 {
   imports = 
     [
-      #./homeManagerModules.nix
-      #home-manager-modules."nixvim/nixvim.nix"
-      #inputs.nixvim.homeManagerModules.nixvim
       "${hmmp}/nixvim/nixvim.nix"
       "${hmmp}/git/git.nix"
       "${hmmp}/alacritty/default.nix"
       "${hmmp}/zsh/default.nix"
       "${hmmp}/tmux/default.nix"
     ];
-
-  #programs.nixvim.enable = true;
 
   home.username = "luh";
   home.homeDirectory = "/home/luh";
@@ -50,7 +45,6 @@ in
     # feel free to add your own or remove some of them
 
     neofetch
-    nnn # terminal file manager
 
     # archives
     zip
@@ -124,137 +118,6 @@ in
 
     xclip
   ];
-
-  #programs.neovim = {
-  #  enable = true;
-  #  viAlias = true;
-  #  vimAlias = true;
-  #  defaultEditor = true;
-  #  package = pkgs.neovim;
-  #  extraLuaPackages = ps: [ps.magick];
-  #};
-
-  # basically copy the whole nvchad that is fetched from github to ~/.config/nvim
-  #xdg.configFile."nvim/" = {
-  #  source = (pkgs.callPackage ./nvchad/default.nix{}).nvchad;
-  #};
-
-  #nvchad = import ./packages/nvim/default.nix;
-  #nvchad{};
-  #nvchad = (pkgs.callPackage ./packages/nvim/default.nix{}).nvchad;
-
-  #home.file.".config/nvim" = {
-  #  source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/packages/nvim/nvchad";
-  #};
-
-  #home.file.".config/hypr" = {
-  #  source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/packages/hypr";
-  #};
-
-  # basic configuration of git, please change to your own
-  #programs.git = {
-  #  enable = true;
-  #  userName = "Luh-code";
-  #  userEmail = "Lasse@hueffler.de";
-  #};
-
-  # starship - an customizable prompt for any shell
-  #programs.starship = {
-  #  enable = true;
-  #  # custom settings
-  #  settings = {
-  #    add_newline = false;
-  #    aws.disabled = true;
-  #    gcloud.disabled = true;
-  #    line_break.disabled = true;
-  #  };
-  #};
-
-  # alacritty - a cross-platform, GPU-accelerated terminal emulator
-  #programs.alacritty = {
-  #  enable = true;
-  #  # custom settings
-  #  settings = {
-  #    shell.program = "zsh";
-  #    env.TERM = "xterm-256color";
-  #    font = {
-  #      normal= {
-	#  family = "FiraCode Nerd Font Mono";
-	#  style = "Regular";
-	#};
-  #      size = 11;
-  #    };
-  #    scrolling.multiplier = 5;
-  #    selection.save_to_clipboard = true;
-  #  };
-  #};
-
-  #programs.zsh = {
-  #  enable = true;
-  #  enableCompletion = true;
-  #  initExtra = ''
-  #    eval "$(zoxide init zsh --cmd cd)"
-  #    eval "$(sh /etc/nixos/tmux.sh)"
-  #  '';
-
-  #  # set some aliases, feel free to add more or remove some
-  #  shellAliases = {
-  #    k = "kubectl";
-  #    urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-  #    urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-  #    update = "sudo nixos-rebuild switch --fast --option eval-cache false";
-  #    la = "eza -lA";
-  #  };
-#
-#    oh-my-zsh = {
-#      enable = true;
-#      plugins = [ "git" "thefuck" ];
-#      theme = "af-magic";
-#    };
-#    #zplug = {
-#    #  enable = true;
-#    #  plugins = [
-#    #    { name = "zsh-users/zsh-autosuggestion"; }
-#    #  ];
-#    #};
-#  };
-
-#  programs.tmux = {
-#    enable = true;
-#    shell = "${pkgs.zsh}/bin/zsh";
-#    terminal = "tmux-256color";
-#    historyLimit = 100000;
-#    clock24 = true;
-#    plugins = with pkgs; [
-#      tmuxPlugins.vim-tmux-navigator
-#    ];
-#    extraConfig = ''  
-#      set -ag terminal-overrides ",xterm-256color:RGB"
-#      # Smart pane switching with awareness of Vim splits.
-#      # See: https://github.com/christoomey/vim-tmux-navigator
-#      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-#          | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?|fzf)(diff)?$'"
-#      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
-#      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
-#      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
-#      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
-#      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-#      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-#          "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-#      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-#          "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
-#
-#      bind-key -T copy-mode-vi 'C-h' select-pane -L
-#      bind-key -T copy-mode-vi 'C-j' select-pane -D
-#      bind-key -T copy-mode-vi 'C-k' select-pane -U
-#      bind-key -T copy-mode-vi 'C-l' select-pane -R
-#      bind-key -T copy-mode-vi 'C-\' select-pane -l
-#    '';
-#  };
-
-  #inputs.nixvim.homeMangerModules.nixvim = {
-  #  enable = true;
-  #};
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
