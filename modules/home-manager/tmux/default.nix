@@ -31,6 +31,9 @@
       bind-key -T copy-mode-vi 'C-k' select-pane -U
       bind-key -T copy-mode-vi 'C-l' select-pane -R
       bind-key -T copy-mode-vi 'C-\' select-pane -l
+
+      set -s escape-time 0
+      set -g status-interval 0
     '';
   };
 }

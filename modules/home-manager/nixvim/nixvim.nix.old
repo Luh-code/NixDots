@@ -10,11 +10,6 @@
     enable = true;
     vimAlias = true;
     defaultEditor = true;
-
-    colorschemes = {
-      gruvbox.enable = false;
-      nord.enable = true;
-    };
     
     opts = {
       relativenumber = true;
@@ -22,10 +17,9 @@
 
     plugins = {
       bufferline = {
-        enable = true;
+        enable = false;
         showTabIndicators = true;
         tabSize = 12;
-        alwaysShowBufferline = true;
       };
 
       tmux-navigator = {
@@ -73,31 +67,11 @@
           cpp = [["clang-format"]];
         };
       };
-    
-      lsp = {
-        enable = true;
-        servers = {
-          eslint = {enable = true;};
-          html = {enable = true;};
-          lua-ls = {enable = true;};
-          nil_ls = {enable = true;};
-          marksman = {enable = true;};
-          pyright = {enable = true;};
-          gopls = {enable = true;};
-          terraformls = {enable = true;};
-          tsserver = {enable = true;};
-          yamlls = {enable = true;};
-          clangd = {enable = true;};
-        };
-      };
 
       lspsaga = {
         enable = true;
         codeAction = {
           showServerName = true;
-        };
-        definition.keys = {
-          
         };
       };
     };
@@ -113,13 +87,9 @@
       };
     };
 
-    extraConfigLuaPre = ''
-      vim.g.mapleader = ' '
-    '';
-    
-    extraConfigVim = ''
-      set signcolumn=yes
-    '';
+    extraConfigLuaPre = "
+    vim.g.mapleader = ' '
+    ";
     
     keymaps = [
       {
@@ -167,28 +137,11 @@
         key = "<C-w>\\";
         action = "<cmd>TmuxNavigatePrevious<cr>";
       }
-      # bufferline 
-      {
-        mode = "n";
-        key = "<TAB>";
-        action = "<cmd>bn<cr>";
-      }
-      {
-        mode = "n";
-        key = "<S-TAB>";
-        action = "<cmd>bp<cr>";
-      }
       # chadtree
       {
         mode = "n";
         key = "<leader>t";
         action = "<cmd>CHADopen<cr>";
-      }
-      # lspsaga
-      {
-        mode = "n";
-        key = "<leader>pd";
-        action = "<cmd>Lspsaga peek_definition<cr>";
       }
     ];
   };

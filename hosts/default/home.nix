@@ -12,6 +12,7 @@ in
       "${hmmp}/alacritty/default.nix"
       "${hmmp}/zsh/default.nix"
       "${hmmp}/tmux/default.nix"
+      "${hmmp}/hyprland/default.nix"
     ];
 
   home.username = "luh";
@@ -44,7 +45,7 @@ in
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
-    neofetch
+    pfetch-rs
 
     # archives
     zip
