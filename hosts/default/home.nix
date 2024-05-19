@@ -13,6 +13,7 @@ in
       "${hmmp}/zsh/default.nix"
       "${hmmp}/tmux/default.nix"
       "${hmmp}/hyprland/default.nix"
+      "${hmmp}/wofi/default.nix"
     ];
 
   home.username = "luh";
@@ -118,6 +119,10 @@ in
     gcc
 
     xclip
+
+    dunst
+    playerctl
+    grimblast
   ];
 
   # This value determines the home Manager release that your

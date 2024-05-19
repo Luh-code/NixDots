@@ -21,6 +21,12 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # env vars
+  environment.variables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
+
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -28,8 +34,21 @@
     driSupport32Bit = true;
   };
 
+  # config nvidia GPU
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelModules = [ "nvidia_uvm" "nvidia_modeset" "nvidia_drm" "nvidia" ];
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+
+  # config AMD CPU
+  hardware.cpu.amd.updateMicrocode = true;
+
+  hardware.bluetooth.enable = true;
+
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
+  services.xserver = {
+    enable = true;
+    videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
+  };
 
   hardware.nvidia = {
 
@@ -110,11 +129,11 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.lightdm.enable = false;
   services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
@@ -214,6 +233,7 @@
     obsidian
     immersed-vr
     clang-tools
+    psmisc
   ];
   #environment.variables.EDITOR = "neovim";
 

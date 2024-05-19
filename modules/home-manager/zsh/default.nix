@@ -11,9 +11,10 @@
 
     # set shell aliases
     shellAliases = {
-      update = "sudo nixos-rebuild switch --fast --option eval-cache false";
+      update = "sudo nixos-rebuild switch"; 
+      update-nocache = "sudo nixos-rebuild switch --option eval-cache false";
       update-channel = "sudo nix-channel --update";
-      full-update = "update && udpate-channel";
+      full-update = "update & udpate-channel";
       la = "eza -lA";
     };
 
