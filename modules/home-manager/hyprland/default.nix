@@ -151,8 +151,8 @@
         border_size = "1";
 
         # fallback colors
-        "col.active_border" = "rgba(0DB7D4FF)";
-        "col.inactive_border" = "rgba(0DB7D4FF)";
+        #"col.active_border" = "rgba(0DB7D4FF)";
+        #"col.inactive_border" = "rgba(0DB7D4FF)";
 
         resize_on_border = "true";
         no_focus_fallback = "true";
@@ -190,7 +190,7 @@
         shadow_range = "20";
         shadow_offset = "0 2";
         shadow_render_power = "4";
-        "col.shadow" = "rgba(0000002A)";
+        #"col.shadow" = "rgba(0000002A)";
 
         # Dimming
         dim_inactive = "false";
