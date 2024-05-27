@@ -4,11 +4,17 @@
 
 { config, lib, pkgs, options, inputs, ... }:
 
+let
+  nixos-modules-path = ./../../modules/nixos;
+  nmp = nixos-modules-path;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+
+      "${nmp}/stylix/default.nix"
 
       #inputs.nixvim.homeManagerModules.nixvim
       # ./modules/neovim/neovim.nix
@@ -231,9 +237,9 @@
     python3
     pipx
     obsidian
-    immersed-vr
     clang-tools
     psmisc
+    base16-schemes
   ];
   #environment.variables.EDITOR = "neovim";
 

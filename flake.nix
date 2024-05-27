@@ -18,6 +18,14 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprcursor.url = "github:hyprwm/hyprcursor";
+    hypridle.url = "github:hyprwm/hypridle";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland-contrib.url = "github:hyprwm/contrib";
+    hyprlock.url = "github:hyprwm/hyprlock";
+
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -31,6 +39,7 @@
           specialArgs = {inherit inputs;};
           modules = [
             ./hosts/default/configuration.nix
+            inputs.stylix.nixosModules.stylix
             #inputs.home-manager.nixosModules.default
           ];
         };
