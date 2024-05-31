@@ -203,6 +203,7 @@ in
   };
 
   home-manager = {
+    backupFileExtension = "backup";
     extraSpecialArgs = { inherit inputs; };
     users = {
       "luh" = import ./home.nix;

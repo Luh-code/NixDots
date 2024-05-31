@@ -123,6 +123,8 @@ in
     dunst
     playerctl
     grimblast
+
+    plymouth
   ];
 
   # This value determines the home Manager release that your
