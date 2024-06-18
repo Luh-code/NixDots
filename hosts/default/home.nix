@@ -15,7 +15,7 @@ in
       "${hmmp}/hyprland/default.nix"
       "${hmmp}/wofi/default.nix"
       #"${hmmp}/swww/default.nix"
-      ./feater-font.nix
+      "${hmmp}/fonts/feather-font.nix"
     ];
 
   home.username = "luh";
