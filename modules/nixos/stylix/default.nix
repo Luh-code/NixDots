@@ -5,7 +5,7 @@
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
     #image = ./backgrounds/illustration-rain-futuristic-city.jpg;
-    image = ./2.jpg;
+    image = ./1.png;
 
     targets.nixos-icons = {
       enable = false;
@@ -15,6 +15,10 @@
       enable = false;
       logo = ./logos/nixos.svg;
     };
+
+    #targets.hyprpaper = {
+    #  enable = true;
+    #};
 
     #targets.plasma = {
     #  enable = false;

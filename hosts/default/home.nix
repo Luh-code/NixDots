@@ -14,6 +14,7 @@ in
       "${hmmp}/tmux/default.nix"
       "${hmmp}/hyprland/default.nix"
       "${hmmp}/wofi/default.nix"
+      "${hmmp}/hyprpaper/default.nix"
     ];
 
   home.username = "luh";

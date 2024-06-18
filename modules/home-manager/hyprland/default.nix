@@ -33,8 +33,8 @@
       };
 
       # set up monitors
-      "$mon1" = "DP-2";
-      "$mon0" = "DP-3";
+      "$mon1" = "DP-3";
+      "$mon0" = "DP-2";
       monitor =
         [
           "$mon0, 1920x1080@144, 0x0, 1"
