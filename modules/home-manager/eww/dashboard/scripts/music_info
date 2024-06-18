@@ -1,0 +1,91 @@
+#!/bin/bash
+
+## Get data
+STATUS="$(spt pb -s)"
+COVER="/tmp/.music_cover.jpg"
+
+## Get status
+get_status() {
+	songstatus=`spt pb -s -f "%s"`
+	if [[ $songstatus == "Error: no track playing" ]]; then
+		echo "⏹"
+	else
+		echo `spt pb -s -f "%s"`
+	fi
+}
+
+## Get song
+get_song() {
+	song=`spt pb -s -f "%t"`
+	if [[ $song == "Error: no track playing" ]]; then
+		echo "Offline"
+	else
+		echo "$song"
+	fi	
+}
+
+## Get artist
+get_artist() {
+	artist=`spt pb -s -f "%a"`
+	if [[ $artist == "Error: no context available" ]]; then
+		echo "Offline"
+	else
+		echo "$artist"
+	fi	
+}
+
+## Get time
+get_time() {
+	stime=`spt pb -s -f "%r" | grep -o "[0-5]*[0-9]:[0-5][0-9]" | sed -n 1p | awk -F: '{ print ($1 * 60) + $2 }'` ## Current time elapsed since beginning in seconds
+	sttime=`spt pb -s -f "%r" | grep -o "[0-5]*[0-9]:[0-5][0-9]" | sed -n 2p | awk -F: '{ print ($1 * 60) + $2 }'` ## Total time of song in seconds
+	time=`bc -l <<< " $stime / $sttime * 100 "` ## Percentage song is finished
+	if [[ "$time" == "Error: no context available" ]]; then
+		echo "0"
+	else
+		echo "$time"
+	fi	
+}
+get_ctime() {
+	ctime=`spt pb -s -f "%r" | grep -o "[0-5]*[0-9]:[0-5][0-9]" | head -n 1`
+	if [[ "$ctime" == "Error: no context available" ]]; then
+		echo "0:00"
+	else
+		echo "$ctime"
+	fi	
+}
+get_ttime() {
+	ttime=`spt pb -s -f "%r" | grep -o "[0-5]*[0-9]:[0-5][0-9]" | head -n 2`
+	if [[ "$ttime" == "Error: no context available" ]]; then
+		echo "0:00"
+	else
+		echo "$ttime"
+	fi	
+}
+
+## Get cover
+get_cover() {
+	ffmpeg -i "`playerctl --player="spotifyd" metadata --format "{{mpris:artUrl}}"`" "${COVER}" -y &> /dev/null
+	echo "$COVER"
+	}
+## Execute accordingly
+if [[ "$1" == "--song" ]]; then
+	get_song
+elif [[ "$1" == "--artist" ]]; then
+	get_artist
+elif [[ "$1" == "--status" ]]; then
+	get_status
+elif [[ "$1" == "--time" ]]; then
+	get_time
+elif [[ "$1" == "--ctime" ]]; then
+	get_ctime
+elif [[ "$1" == "--ttime" ]]; then
+	get_ttime
+elif [[ "$1" == "--cover" ]]; then
+	get_cover
+elif [[ "$1" == "--toggle" ]]; then
+	spt pb --toggle
+elif [[ "$1" == "--next" ]]; then
+	{ spt pb --next; get_cover; }
+elif [[ "$1" == "--prev" ]]; then
+	{ spt pb -pp; get_cover; }
+fi

@@ -30,7 +30,7 @@ in
   #   executable = true;  # make all files executable
   # };
 
-  home.fiel.".config/eww"  = {
+  home.file.".config/eww"  = {
     source = "${hmmp}/eww/adi1090x-widgets-spotify/eww";
     recursive = true;
     executable = true;
@@ -146,7 +146,6 @@ in
 
     eww
     spotifyd
-    spt
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;
