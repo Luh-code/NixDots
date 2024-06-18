@@ -32,6 +32,11 @@
         #};
       };
 
+      exec-once = 
+        [
+          "hyprpaper"
+        ];
+
       # set up monitors
       "$mon1" = "DP-3";
       "$mon0" = "DP-2";

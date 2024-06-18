@@ -202,6 +202,8 @@ in
     ];
   };
 
+  #services.hyprpaper.enable = true;
+
   home-manager = {
     backupFileExtension = "backup";
     extraSpecialArgs = { inherit inputs; };
