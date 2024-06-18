@@ -73,6 +73,7 @@ in
       "$explorer" = "dolphin";
       #"$menu" = "killall .wofi-wrapped & wofi --show drun";
       "$menu" = "killall wofi || wofi --show drun";
+      "$fsm" = "bash ~/.config/eww/dashboard/launch_dashboard";
       bind =
         [
           # hyprland controls
@@ -100,6 +101,7 @@ in
           "$mod, b, exec, $browser"
           "$mod, e, exec, $explorer"
           "$mod, space, exec, $menu"
+          "$mod SHIFT, space, exec, $fsm"
 
           # utils
           "$mod SHIFT, s, exec, grimblast --notify --cursor --freeze copysave area"
