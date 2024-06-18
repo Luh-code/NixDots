@@ -28,19 +28,14 @@
 
     stylix = {
       url = "github:danth/stylix";
-      #inputs.nixpkgs.follows = "nixpkgs";
-    }; 
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    swww.url = "github:LGFae/swww";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
     let
-      #system = "x86_64-linux";
-      #pkgs = import nixpkgs {
-      #  inherit system;
-      #  config = {
-      #    allowUnfree = true;
-      #  };
-      #};
       mkHost = hostName: system:
         nixpkgs.lib.nixosSystem {
           pkgs = import nixpkgs {
@@ -61,18 +56,6 @@
     in
     {
       nixosConfigurations = {
-	      #default = nixpkgs.lib.nixosSystem {
-        #  #system = system;
-        #  #pkgs = pkgs;
-        #  inherit pkgs;
-        #  #inherit system;
-        #  specialArgs = {inherit inputs;};
-        #  modules = [
-        #    ./hosts/default/configuration.nix
-        #    inputs.stylix.nixosModules.stylix
-        #    #inputs.home-manager.nixosModules.default
-        #  ];
-        #};
         default = mkHost "default" "x86_64-linux";
       };
     };

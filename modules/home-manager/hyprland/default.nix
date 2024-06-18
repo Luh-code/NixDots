@@ -1,9 +1,12 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, config, ... }:
 
 #let
 #  hyprlandConfigLocation = ./;
 #  cLoc = hyprlandConfigLocation;
 #in
+let
+  base0FColor = config.stylix.base16Scheme.base0F;
+in
 {
   #imports = 
   #  [
@@ -34,7 +37,8 @@
 
       exec-once = 
         [
-          "hyprpaper"
+          "swww-daemon"
+          #"swww img ${pkgs.stylix.image}"
         ];
 
       # set up monitors
@@ -67,11 +71,13 @@
       "$term" = "alacritty";
       "$browser" = "floorp";
       "$explorer" = "dolphin";
-      "$menu" = "killall wofi & wofi --show drun";
+      #"$menu" = "killall .wofi-wrapped & wofi --show drun";
+      "$menu" = "killall wofi || wofi --show drun";
       bind =
         [
-          # exit Hyprland
+          # hyprland controls
           "$mod SHIFT, m, exit"
+          "$mod SHIFT, r, exec, hyprctl reload; notify-send \"Hyprland Reloaded!\""
           
           # window controls
           "$mod, q, killactive"
@@ -156,8 +162,9 @@
         border_size = "1";
 
         # fallback colors
-        #"col.active_border" = "rgba(0DB7D4FF)";
-        #"col.inactive_border" = "rgba(0DB7D4FF)";
+        #"col.active_border" = lib.mkForce "rgb(${toString base0FColor})";
+        "col.active_border" = lib.mkForce "rgba(525252FF)";
+        "col.inactive_border" = lib.mkForce "rgba(0000002A)";
 
         resize_on_border = "true";
         no_focus_fallback = "true";
@@ -172,16 +179,30 @@
         smart_resizing = "false";
       };
 
+      bezier = [
+        "funk,.32,1.06,0,.99"
+      ];
+
+      animation = [
+        "workspaces,1,7,funk,slidefade 0%"
+        "windows,1,7,funk,slide"
+        "fade,1,7,funk"
+        "border,1,2,funk"
+        "borderangle,1,2,funk"
+        "layersIn,1,7,funk,slide top"
+        "layersOut,1,7,funk,slide bottom"
+      ];
+
       decoration = {
-        rounding = "20";
+        rounding = "15";
 
         blur = {
           enabled = "true";
           xray = "true";
           special = "false";
           new_optimizations = "true";
-          size = "7";
-          passes = "4";
+          size = "2";
+          passes = "2";
           brightness = "1";
           noise = "0.01";
           contrast = "1";
@@ -195,13 +216,17 @@
         shadow_range = "20";
         shadow_offset = "0 2";
         shadow_render_power = "4";
-        #"col.shadow" = "rgba(0000002A)";
+        "col.shadow" = lib.mkForce"rgba(0000002A)";
 
         # Dimming
-        dim_inactive = "false";
+        dim_inactive = "true";
         dim_strength = "0.1";
         dim_special = "0";
       };
+
+      windowrulev2 = 
+        [
+        ];
     };
   };
 }

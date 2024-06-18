@@ -14,7 +14,7 @@ in
       "${hmmp}/tmux/default.nix"
       "${hmmp}/hyprland/default.nix"
       "${hmmp}/wofi/default.nix"
-      "${hmmp}/swww/default.nix"
+      #"${hmmp}/swww/default.nix"
     ];
 
   home.username = "luh";
@@ -29,6 +29,12 @@ in
   #   recursive = true;   # link recursively
   #   executable = true;  # make all files executable
   # };
+
+  home.fiel.".config/eww"  = {
+    source = "${hmmp}/eww/adi1090x-widgets-spotify/eww";
+    recursive = true;
+    executable = true;
+  };
 
   # encode the file content in nix configuration file directly
   # home.file.".xxx".text = ''
@@ -122,13 +128,25 @@ in
     xclip
 
     dunst
+    libnotify
+
     playerctl
     grimblast
 
     plymouth
 
-    #hyprpaper
-    swww
+    inputs.swww.packages.${pkgs.system}.swww
+    
+    dolphin
+    feh
+    imlib2Full
+    haruna
+
+    bibata-cursors
+
+    eww
+    spotifyd
+    spt
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;

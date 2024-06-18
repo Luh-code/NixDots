@@ -6,7 +6,8 @@
   #    inputs.hyprpaper.homeManagerModules.hyprpaper
   #  ];
 
-  programs.ewww = {
+  swww = {
     enable = true;
+    package = inputs.swww.packages.${pkgs.system}.swww;
   };
 }

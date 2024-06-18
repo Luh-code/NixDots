@@ -13,7 +13,7 @@
 
     colorschemes = {
       gruvbox.enable = false;
-      nord.enable = true;
+      nord.enable = false;
     };
     
     opts = {

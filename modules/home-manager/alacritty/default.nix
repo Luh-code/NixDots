@@ -14,6 +14,11 @@
       #  };
       #  size = 11;
       #};
+      window = {
+        #opacity = 0.9;
+        decorations = "None";
+        blur = false;
+      };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
     };
