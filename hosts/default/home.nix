@@ -15,6 +15,7 @@ in
       "${hmmp}/hyprland/default.nix"
       "${hmmp}/wofi/default.nix"
       #"${hmmp}/swww/default.nix"
+      ./feater-font.nix
     ];
 
   home.username = "luh";
@@ -31,7 +32,7 @@ in
   # };
 
   home.file.".config/eww"  = {
-    source = "${hmmp}/eww/adi1090x-widgets-spotify/eww";
+    source = "${hmmp}/eww";
     recursive = true;
     executable = true;
   };
@@ -146,6 +147,7 @@ in
 
     eww
     spotifyd
+    bash
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;
