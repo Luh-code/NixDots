@@ -26,24 +26,54 @@
     hyprlock.url = "github:hyprwm/hyprlock";
     #hyprpaper.url = "github:hyprwm/hyprpaper";
 
-    stylix.url = "github:danth/stylix";
+    stylix = {
+      url = "github:danth/stylix";
+      #inputs.nixpkgs.follows = "nixpkgs";
+    }; 
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
+      #system = "x86_64-linux";
+      #pkgs = import nixpkgs {
+      #  inherit system;
+      #  config = {
+      #    allowUnfree = true;
+      #  };
+      #};
+      mkHost = hostName: system:
+        nixpkgs.lib.nixosSystem {
+          pkgs = import nixpkgs {
+            inherit system;
+            config = {
+               allowUnfree = true; 
+            };
+          };
+          specialArgs = {
+            inherit inputs;
+          };
+          modules =
+            [
+              ./hosts/${hostName}/configuration.nix
+              inputs.stylix.nixosModules.stylix
+            ];
+        };
     in
     {
       nixosConfigurations = {
-	default = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs;};
-          modules = [
-            ./hosts/default/configuration.nix
-            inputs.stylix.nixosModules.stylix
-            #inputs.home-manager.nixosModules.default
-          ];
-        };
+	      #default = nixpkgs.lib.nixosSystem {
+        #  #system = system;
+        #  #pkgs = pkgs;
+        #  inherit pkgs;
+        #  #inherit system;
+        #  specialArgs = {inherit inputs;};
+        #  modules = [
+        #    ./hosts/default/configuration.nix
+        #    inputs.stylix.nixosModules.stylix
+        #    #inputs.home-manager.nixosModules.default
+        #  ];
+        #};
+        default = mkHost "default" "x86_64-linux";
       };
     };
 }

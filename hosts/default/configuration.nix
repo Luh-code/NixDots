@@ -14,6 +14,7 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
 
+      #inputs.stylix.nixosModules.stylix
       "${nmp}/stylix/default.nix"
 
       #inputs.nixvim.homeManagerModules.nixvim
@@ -218,7 +219,7 @@ in
   ]; 
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

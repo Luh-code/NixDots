@@ -14,7 +14,7 @@ in
       "${hmmp}/tmux/default.nix"
       "${hmmp}/hyprland/default.nix"
       "${hmmp}/wofi/default.nix"
-      #"${hmmp}/hyprpaper/default.nix"
+      "${hmmp}/swww/default.nix"
     ];
 
   home.username = "luh";
@@ -127,8 +127,13 @@ in
 
     plymouth
 
-    hyprpaper
+    #hyprpaper
+    swww
   ];
+
+  #stylix.package = inputs.stylix.homeMangerModules.stylix;
+
+  #stylix.enable = true;
 
   #services.hyprpaper.enable = true;
 

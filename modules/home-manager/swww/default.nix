@@ -6,7 +6,7 @@
   #    inputs.hyprpaper.homeManagerModules.hyprpaper
   #  ];
 
-  services.hyprpaper = {
+  programs.ewww = {
     enable = true;
   };
 }
