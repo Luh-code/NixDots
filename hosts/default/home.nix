@@ -126,6 +126,8 @@ in
     grimblast
 
     plymouth
+
+    hyprpaper
   ];
 
   # This value determines the home Manager release that your
