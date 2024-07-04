@@ -28,7 +28,7 @@ in
 
       # set up keyboard and mouse
       input = {
-        kb_layout = "de";
+        kb_layout = "us";
         ## set up cursor
         #cursor = {
         #  no_hardware_cursors = true;
@@ -42,8 +42,8 @@ in
         ];
 
       # set up monitors
-      "$mon1" = "DP-3";
-      "$mon0" = "DP-2";
+      "$mon0" = "DP-3";
+      "$mon1" = "DP-4";
       monitor =
         [
           "$mon0, 1920x1080@144, 0x0, 1"
@@ -53,13 +53,15 @@ in
       workspace = (
         builtins.concatLists (
           builtins.genList (
-            x: let
+            x:
+            let
               ws = let
                 c = (x + 1) / 10;
               in
                 builtins.toString (x + 1 - (c * 10));
             in 
               [
+                #"${if ws == 10 then builtins.toString (0) else builtins.toString (ws)}, monitor:${if x < 5 then "$mon0" else "$mon1"}"
                 "${ws}, monitor:${if x < 5 then "$mon0" else "$mon1"}"
               ]
           )
@@ -140,6 +142,10 @@ in
           ",XF86AudioPlay, exec, playerctl play-pause"
           ",XF86AudioNext, exec, playerctl next"
           ",XF86AudioPrev, exec, playerctl previous"
+          "$mod, down, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          "$mod, up, exec, playerctl play-pause"
+          "$mod, right, exec, playerctl next"
+          "$mod, left, exec, playerctl previous"
         ];
       bindle =
         [
@@ -147,6 +153,10 @@ in
           ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
           "SHIFT, XF86AudioRaiseVolume, exec, playerctl volume 0.05+"
           "SHIFT, XF86AudioLowerVolume, exec, playerctl volume 0.05-"
+          "$mod, home, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+          "$mod, delete, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
+          "$mod SHIFT, home, exec, playerctl volume 0.05+"
+          "$mod SHIFT, delete, exec, playerctl volume 0.05-"
         ];
 
 

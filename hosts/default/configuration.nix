@@ -7,6 +7,8 @@
 let
   nixos-modules-path = ./../../modules/nixos;
   nmp = nixos-modules-path;
+  home-manager-module-path = ./../../modules/home-manager;
+  hmmp = home-manager-module-path;
 in
 {
   imports =
@@ -37,14 +39,22 @@ in
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
+    package = pkgs.mesa;
     driSupport = true;
     driSupport32Bit = true;
   };
 
   # config nvidia GPU
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelModules = [ "nvidia_uvm" "nvidia_modeset" "nvidia_drm" "nvidia" ];
-  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+  boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" ];
+  boot.kernelModules = [ "nouveau" ];
+  boot.kernelParams = [
+    "nouveau.config=NvGspRm=1"
+    "nouveau.debug=info,VBIOS=info,gsp=debug"
+  ];
+  #boot.kernelModules = [ "nvidia_uvm" "nvidia_modeset" "nvidia_drm" "nvidia" ];
+  #boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
+  #boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
 
   # config AMD CPU
   hardware.cpu.amd.updateMicrocode = true;
@@ -58,6 +68,7 @@ in
   };
 
   hardware.nvidia = {
+    #package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     # Modesetting is required.
     modesetting.enable = true;
@@ -145,12 +156,15 @@ in
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "de";
-    variant = "nodeadkeys";
+    layout = "us";
+    #variant = "nodeadkeys";
   };
 
+  services.ratbagd.enable = true;
+
   # Configure console keymap
-  console.keyMap = "de-latin1-nodeadkeys";
+  #console.keyMap = "de-latin1-nodeadkeys";
+  console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -205,6 +219,9 @@ in
 
   #services.hyprpaper.enable = true;
 
+  programs.zsh.enable=true;
+  users.users.luh.shell = pkgs.zsh;
+
   home-manager = {
     backupFileExtension = "backup";
     extraSpecialArgs = { inherit inputs; };
@@ -215,7 +232,8 @@ in
   
   #fonts.packages = with pkgs; [ fira-code ];
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    (pkgs.callPackage "${hmmp}/fonts/feather-font.nix" { })
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" "JetBrainsMono" ]; })
   ]; 
 
   # Allow unfree packages
@@ -235,6 +253,9 @@ in
     cmake
     vulkan-tools-lunarg
     vulkan-headers
+    vulkan-loader
+    vulkan-volk
+    vulkan-validation-layers
     wayland-scanner
     pkg-config
     wlroots
@@ -245,9 +266,8 @@ in
     psmisc
     base16-schemes
   ];
+
   #environment.variables.EDITOR = "neovim";
-
-
 
   #boot.extraModulePackages = with config.boot.kernelPackages; [ uinput ];
 

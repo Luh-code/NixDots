@@ -15,7 +15,6 @@ in
       "${hmmp}/hyprland/default.nix"
       "${hmmp}/wofi/default.nix"
       #"${hmmp}/swww/default.nix"
-      "${hmmp}/fonts/feather-font.nix"
     ];
 
   home.username = "luh";
@@ -37,6 +36,7 @@ in
     executable = true;
   };
 
+
   # encode the file content in nix configuration file directly
   # home.file.".xxx".text = ''
   #     xxx
@@ -54,7 +54,7 @@ in
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
-    pfetch-rs
+    fastfetch
 
     # archives
     zip
@@ -121,8 +121,19 @@ in
     #neovim
     #nixvim
     discord
+    webcord
+    pavucontrol
+    obs-studio
+    #xdg-desktop-portal-wlr
+    xdg-desktop-portal-hyprland
+    qt5Full
+    gst_all_1.gstreamer
+    obs-studio-plugins.wlrobs
+    brave
+    ranger
     steam
     spotify
+    meson
     ninja
     gcc
 
@@ -139,6 +150,7 @@ in
     inputs.swww.packages.${pkgs.system}.swww
     
     dolphin
+    cinnamon.nemo-with-extensions
     feh
     imlib2Full
     haruna
@@ -148,6 +160,11 @@ in
     eww
     spotifyd
     bash
+    (pkgs.callPackage "${hmmp}/fonts/feather-font.nix" { })
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" "JetBrainsMono" ]; }) 
+    
+    piper
+    libratbag
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;

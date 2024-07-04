@@ -23,6 +23,26 @@
       fsType = "vfat";
     };
 
+  fileSystems."/para" =
+    { device = "/dev/disk/by-uuid/1C6433EC6433C774";
+      fsType = "ntfs";
+    };
+
+  fileSystems."/speedy" = 
+    { device = "/dev/disk/by-uuid/01D73034490843B0";
+      fsType = "ntfs";
+    };
+
+  fileSystems."/winc" = 
+    { device = "/dev/disk/by-uuid/01D9C191D3543470";
+      fsType = "ntfs";
+    };
+
+  #fileSystems."/data" =
+  #  { device = "/dev/disk/by-uuid/2A0895240894EFD5";
+  #    fsType = "ntfs";
+  #  };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/bc19123e-077f-4bda-aacf-3c873864e0b7"; }
     ];

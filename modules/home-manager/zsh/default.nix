@@ -7,6 +7,8 @@
     initExtra = ''
       eval "$(zoxide init zsh --cmd cd)"
       eval "$(sh /etc/nixos/tmux.sh)"
+      LS_COLORS=$LS_COLORS:'tw=32' ; export LS_COLORS
+      LS_COLORS=$LS_COLORS:'ow=34' ; export LS_COLORS
     '';
 
     # set shell aliases

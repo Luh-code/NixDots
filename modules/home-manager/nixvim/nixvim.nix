@@ -100,6 +100,10 @@
           
         };
       };
+
+      transparent = {
+        enable = false;
+      };
     };
 
     files = {
@@ -142,6 +146,28 @@
         key = "<C-l>";
         action = "<Right>";
       }
+      # Scoll
+      {
+        mode = "n";
+        key = "<C-e>";
+        action = "3<Down>";
+      }
+      {
+        mode = "n";
+        key = "<C-q>";
+        action = "3<Up>";
+      }
+      {
+        mode = "n";
+        key = "<A-e>";
+        action = "<PageDown>";
+      }
+      {
+        mode = "n";
+        key = "<A-q>";
+        action = "<PageUp>";
+      }
+      # Tmux
       {
         mode = "n";
         key = "<C-w>h";
