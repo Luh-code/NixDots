@@ -6,8 +6,12 @@ let
   nmp = nixos-modules-path;
   home-manager-module-path = ./../../modules/home-manager;
   hmmp = home-manager-module-path;
+
+  currentDirectory = builtins.getEnv "PWD";
 in
 {
+  environment.etc."debug-current-directory".text = currentDirectory;
+  environment.etc."debug-nixos-path".text = builtins.toString nmp;
   imports =
     [ 
       inputs.home-manager.nixosModules.default
@@ -23,8 +27,6 @@ in
   #  enable = true;
   #  package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   #};
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   #boot.kernelModules = [ "nvidia_uvm" "nvidia_modeset" "nvidia_drm" "nvidia" ];
   #boot.kernelParams = [ "nvidia-drm.fbdev=1" ];

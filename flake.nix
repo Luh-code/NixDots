@@ -49,6 +49,9 @@
           };
           modules =
             [
+              ./hosts/shared/configuration.nix
+              ./hosts/shared/nvidia.nix
+              ./hosts/shared/amd_cpu.nix
               ./hosts/${hostName}/configuration.nix
               inputs.stylix.nixosModules.stylix
             ];
