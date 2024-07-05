@@ -1,18 +1,11 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, lib, pkgs, options, inputs, ... }:
 
 let
   nixos-modules-path = ./../../modules/nixos;
   nmp = nixos-modules-path;
-  
   home-manager-module-path = ./../../modules/home-manager;
   hmmp = home-manager-module-path;
-
-  shared-config-path = ./../shared;
-  scp = shared-config-path;
 in
 {
   imports =
@@ -25,9 +18,6 @@ in
 
       #inputs.nixvim.homeManagerModules.nixvim
       # ./modules/neovim/neovim.nix
-
-      "${scp}/configuration.nix"
-      "${scp}/nvidia.nix"
     ];
 
   #programs.hyprland = {
@@ -37,20 +27,6 @@ in
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # env vars
-  environment.variables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-  };
-  environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
-
-  # config nvidia GPU
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" ];
-  boot.kernelModules = [ "nouveau" ];
-  boot.kernelParams = [
-    "nouveau.config=NvGspRm=1"
-    "nouveau.debug=info,VBIOS=info,gsp=debug"
-  ];
   #boot.kernelModules = [ "nvidia_uvm" "nvidia_modeset" "nvidia_drm" "nvidia" ];
   #boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
   #boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
@@ -59,6 +35,7 @@ in
   hardware.cpu.amd.updateMicrocode = true;
 
   hardware.bluetooth.enable = true;
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
