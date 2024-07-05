@@ -43,18 +43,6 @@ in
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
 
-  # config nvidia GPU
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" ];
-  boot.kernelModules = [ "nouveau" ];
-  boot.kernelParams = [
-    "nouveau.config=NvGspRm=1"
-    "nouveau.debug=info,VBIOS=info,gsp=debug"
-  ];
-  #boot.kernelModules = [ "nvidia_uvm" "nvidia_modeset" "nvidia_drm" "nvidia" ];
-  #boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
-  #boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
-
   # config AMD CPU
   hardware.cpu.amd.updateMicrocode = true;
 
