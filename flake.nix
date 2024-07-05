@@ -50,8 +50,9 @@
           modules =
             [
               ./hosts/shared/configuration.nix
-              ./hosts/shared/nvidia.nix
-              ./hosts/shared/amd_cpu.nix
+              ./hosts/shared/gpus/nvidia.nix
+              ./hosts/shared/cpus/amd_cpu.nix
+              ./hosts/shared/kb-layouts/en_us.nix
               ./hosts/${hostName}/configuration.nix
               inputs.stylix.nixosModules.stylix
             ];

@@ -32,8 +32,6 @@ in
   #boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
   #boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
 
-  # config AMD CPU
-  hardware.cpu.amd.updateMicrocode = true;
 
   hardware.bluetooth.enable = true;
 
@@ -92,17 +90,8 @@ in
   services.xserver.displayManager.lightdm.enable = false;
   services.xserver.desktopManager.plasma5.enable = false;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    #variant = "nodeadkeys";
-  };
 
   services.ratbagd.enable = true;
-
-  # Configure console keymap
-  #console.keyMap = "de-latin1-nodeadkeys";
-  console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
