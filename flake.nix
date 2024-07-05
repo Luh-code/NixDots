@@ -50,9 +50,6 @@
           modules =
             [
               ./hosts/shared/configuration.nix
-              ./hosts/shared/gpus/nvidia.nix
-              ./hosts/shared/cpus/amd.nix
-              ./hosts/shared/kb-layouts/en_us.nix
               ./hosts/${hostName}/configuration.nix
               inputs.stylix.nixosModules.stylix
             ];
@@ -61,6 +58,15 @@
     {
       nixosConfigurations = {
         default = mkHost "default" "x86_64-linux";
+	default.nixpkgs.lib.nixosSystem.modules + [
+	  ./hosts/shared/gpus/nvidia.nix
+          ./hosts/shared/cpus/amd.nix
+          ./hosts/shared/kb-layouts/en_us.nix
+        ];
+        laptop = mkHost "laptop" "x86_64-linux";
+	laptop.nixpkgs.lib.nixosSystem.modules + [
+	  ./hosts/shared/kb-layouts/en_us.nix
+	];
       };
     };
 }
