@@ -165,6 +165,8 @@ in
     
     piper
     libratbag
+
+    keepassxc
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;

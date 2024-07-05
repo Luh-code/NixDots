@@ -248,7 +248,6 @@ in
     curl
     zsh
     #inputs.helix.packages."${pkgs.system}".helix
-    keepass
     nodejs
     cmake
     vulkan-tools-lunarg
