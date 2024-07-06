@@ -51,6 +51,7 @@
             [
               ./hosts/shared/configuration.nix
               ./hosts/${hostName}/configuration.nix
+              #./hosts/${hostName}/home.nix
               inputs.stylix.nixosModules.stylix
             ] ++ extraModules;
         };
@@ -61,7 +62,7 @@
 	        ./hosts/shared/gpus/nvidia.nix
           ./hosts/shared/cpus/amd.nix
           ./hosts/shared/kb-layouts/en_us.nix
-          ./hosts/default/hyprland.nix
+          #./hosts/default/hyprland.nix
         ];
         laptop = mkHost "laptop" "x86_64-linux" [
 	        ./hosts/shared/kb-layouts/en_us.nix

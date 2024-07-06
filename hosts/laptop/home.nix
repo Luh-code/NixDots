@@ -12,7 +12,7 @@ in
       "${hmmp}/alacritty/default.nix"
       "${hmmp}/zsh/default.nix"
       "${hmmp}/tmux/default.nix"
-      "${hmmp}/hyprland/default.nix"
+      "${hmmp}/hyprland/laptop.nix"
       "${hmmp}/wofi/default.nix"
       #"${hmmp}/swww/default.nix"
     ];

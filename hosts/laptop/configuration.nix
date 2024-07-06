@@ -18,4 +18,17 @@ in
     ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  home-manager = {
+    backupFileExtension = "backup";
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "luh" = import ./home.nix;
+    };
+  };
+
+  services.xserver = lib.mkForce {
+    displayManager.gdm.enable = false;
+    desktopManager.gnome.enable = false;
+  };
 }

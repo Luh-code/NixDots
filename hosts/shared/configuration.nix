@@ -149,13 +149,13 @@ in
   programs.zsh.enable=true;
   users.users.luh.shell = pkgs.zsh;
 
-  home-manager = {
-    backupFileExtension = "backup";
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "luh" = import ./home.nix;
-    };
-  };
+  #home-manager = {
+  #  backupFileExtension = "backup";
+  #  extraSpecialArgs = { inherit inputs; };
+  #  users = {
+  #    "luh" = import ./home.nix;
+  #  };
+  #};
   
   #fonts.packages = with pkgs; [ fira-code ];
   fonts.packages = with pkgs; [
@@ -191,6 +191,7 @@ in
     clang-tools
     psmisc
     base16-schemes
+    mesa
   ];
 
   #environment.variables.EDITOR = "neovim";

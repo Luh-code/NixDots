@@ -3,13 +3,10 @@
 let
   home-manager-modules-path = ./../../modules/home-manager;
   hmmp = home-manager-modules-path;
+
+  hyprland = import "${hmmp}/hyprland/default.nix";
 in
 {
-  imports =
-    [
-      "${hmmp}/hyprland/default.nix"
-    ];
-
   mon0 = "DP-3";
   mon1 = "DP-4";
 
@@ -57,5 +54,5 @@ in
           10)
       );
 
-  mkHyprConfig monitors workspaces bindExtra;
+  hyprland.mkHyprConfig monitors workspaces bindExtra;
 }

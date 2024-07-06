@@ -18,4 +18,12 @@ in
     ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  home-manager = {
+    backupFileExtensions = "backup",
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "luh" = import ./home.nix;
+     };
+  };
 }

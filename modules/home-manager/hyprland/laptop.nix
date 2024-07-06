@@ -42,31 +42,31 @@ in
         ];
 
       # set up monitors
-      "$mon0" = "DP-3";
-      "$mon1" = "DP-4";
-      monitor =
-        [
-          "$mon0, 1920x1080@144, 0x0, 1"
-          "$mon1, 1920x1080@60, 1920x0, 1"
-        ];
+      #"$mon0" = "DP-3";
+      #"$mon1" = "DP-4";
+      #monitor =
+      #  [
+      #    "$mon0, 1920x1080@144, 0x0, 1"
+      #    "$mon1, 1920x1080@60, 1920x0, 1"
+      #  ];
       # assign workspaces 1-5 to $mon0 and 6-10 to $mon1
-      workspace = (
-        builtins.concatLists (
-          builtins.genList (
-            x:
-            let
-              ws = let
-                c = (x + 1) / 10;
-              in
-                builtins.toString (x + 1 - (c * 10));
-            in 
-              [
-                #"${if ws == 10 then builtins.toString (0) else builtins.toString (ws)}, monitor:${if x < 5 then "$mon0" else "$mon1"}"
-                "${ws}, monitor:${if x < 5 then "$mon0" else "$mon1"}"
-              ]
-          )
-        10)
-      );
+      #workspace = (
+      #  builtins.concatLists (
+      #    builtins.genList (
+      #      x:
+      #      let
+      #        ws = let
+      #          c = (x + 1) / 10;
+      #        in
+      #          builtins.toString (x + 1 - (c * 10));
+      #      in 
+      #        [
+      #          #"${if ws == 10 then builtins.toString (0) else builtins.toString (ws)}, monitor:${if x < 5 then "$mon0" else "$mon1"}"
+      #          "${ws}, monitor:${if x < 5 then "$mon0" else "$mon1"}"
+      #        ]
+      #    )
+      #  10)
+      #);
 
       # set up bindings
       "$mod" = "SUPER";
@@ -116,7 +116,7 @@ in
           # scratchpad
           "$mod, y, togglespecialworkspace, magic"
           "$mod SHIFT, y, movetoworkspace, special:magic"
-        ]
+        )
         ++ (
           # workspaces
           # binds $mod + 1..10 to switching workspaces
