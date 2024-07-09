@@ -66,7 +66,7 @@
         ];
         laptop = mkHost "laptop" "x86_64-linux" [
 	        ./hosts/shared/kb-layouts/en_us.nix
-	        ./hosts/shared/gpus/nvidia.nix 
+	        #./hosts/shared/gpus/nvidia.nix 
         ];
       };
     };

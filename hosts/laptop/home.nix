@@ -167,6 +167,8 @@ in
     libratbag
 
     keepassxc
+
+    overskride
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;

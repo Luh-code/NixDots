@@ -31,4 +31,16 @@ in
     displayManager.gdm.enable = false;
     desktopManager.gnome.enable = false;
   };
+  
+  hardware.opengl.enable = lib.mkForce true;
+  hardware.opengl.extraPackages = lib.mkForce ( with pkgs; [
+    vaapiVdpau
+    libvdpau-va-gl
+  ]);
+
+  hardware.enableAllFirmware = true;
+
+  boot.extraModprobeConfig = ''
+    options snd-intel-dspcfg dsp_driver=1
+  '';
 }

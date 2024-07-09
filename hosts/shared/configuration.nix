@@ -33,6 +33,8 @@ in
   #boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
 
 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   hardware.bluetooth.enable = true;
 
 
@@ -52,7 +54,19 @@ in
   #  fsType = "ntfs-3g";
   #  options = [ "rw" "uid=1000"];
   #};
-  
+
+  environment.variables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  services.xserver.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -191,7 +205,6 @@ in
     clang-tools
     psmisc
     base16-schemes
-    mesa
   ];
 
   #environment.variables.EDITOR = "neovim";

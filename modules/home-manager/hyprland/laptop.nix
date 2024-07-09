@@ -19,16 +19,17 @@ in
       # set up environment variables
       env = 
         [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "XDG_SESSION_TYPE,wayland"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          #"LIBVA_DRIVER_NAME,nvidia"
+          #"XDG_SESSION_TYPE,wayland"
+          #"GBM_BACKEND,nvidia-drm"
+          #"__GLX_VENDOR_LIBRARY_NAME,nvidia"
           "ELECTRON_OZONE_PLATFORM_HINT,auto"
-        ];
+	        "WLR_DRM_DEVICES,$HOME/cards/igpu"
+	      ];
 
       # set up keyboard and mouse
       input = {
-        kb_layout = "us";
+        kb_layout = "de";
         ## set up cursor
         #cursor = {
         #  no_hardware_cursors = true;
@@ -42,13 +43,12 @@ in
         ];
 
       # set up monitors
-      #"$mon0" = "DP-3";
+      "$mon0" = "eDP-1";
       #"$mon1" = "DP-4";
-      #monitor =
-      #  [
-      #    "$mon0, 1920x1080@144, 0x0, 1"
-      #    "$mon1, 1920x1080@60, 1920x0, 1"
-      #  ];
+      monitor =
+        [
+          "$mon0, 1920x1080@60, 0x0, 1"
+        ];
       # assign workspaces 1-5 to $mon0 and 6-10 to $mon1
       #workspace = (
       #  builtins.concatLists (
@@ -116,7 +116,7 @@ in
           # scratchpad
           "$mod, y, togglespecialworkspace, magic"
           "$mod SHIFT, y, movetoworkspace, special:magic"
-        )
+        ]
         ++ (
           # workspaces
           # binds $mod + 1..10 to switching workspaces

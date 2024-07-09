@@ -1,22 +1,10 @@
 { pkgs, config, ...}:
 
 {
-  # env vars
-  environment.variables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-  };
-  environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
-
   # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    package = pkgs.mesa;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  hardware.opengl.package = pkgs.mesa;
 
   # config nvidia GPU
-  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" ];
   boot.kernelModules = [ "nouveau" ];
   boot.kernelParams = [
@@ -25,10 +13,7 @@
   ];
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver = {
-    enable = true;
-    videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
-  };
+  services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
 
   hardware.nvidia = {
     #package = config.boot.kernelPackages.nvidiaPackages.stable;
