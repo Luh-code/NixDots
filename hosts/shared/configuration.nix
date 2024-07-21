@@ -205,6 +205,8 @@ in
     clang-tools
     psmisc
     base16-schemes
+    exfat
+    exfatprogs
   ];
 
   #environment.variables.EDITOR = "neovim";

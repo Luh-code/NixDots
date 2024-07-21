@@ -169,6 +169,13 @@ in
     keepassxc
 
     overskride
+
+    libreoffice-qt
+    hunspell
+    hunspellDicts.uk_UA
+    hunspellDicts.th_TH
+    hunspellDicts.de_DE
+    obsidian 
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;

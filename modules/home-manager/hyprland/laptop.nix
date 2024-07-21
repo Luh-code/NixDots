@@ -142,10 +142,6 @@ in
           ",XF86AudioPlay, exec, playerctl play-pause"
           ",XF86AudioNext, exec, playerctl next"
           ",XF86AudioPrev, exec, playerctl previous"
-          "$mod, down, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-          "$mod, up, exec, playerctl play-pause"
-          "$mod, right, exec, playerctl next"
-          "$mod, left, exec, playerctl previous"
         ];
       bindle =
         [
@@ -153,10 +149,6 @@ in
           ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
           "SHIFT, XF86AudioRaiseVolume, exec, playerctl volume 0.05+"
           "SHIFT, XF86AudioLowerVolume, exec, playerctl volume 0.05-"
-          "$mod, home, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-          "$mod, delete, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
-          "$mod SHIFT, home, exec, playerctl volume 0.05+"
-          "$mod SHIFT, delete, exec, playerctl volume 0.05-"
         ];
 
 
