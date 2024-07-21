@@ -29,6 +29,7 @@ in
       # set up keyboard and mouse
       input = {
         kb_layout = "us";
+        accel_profile = "flat";
         ## set up cursor
         #cursor = {
         #  no_hardware_cursors = true;
