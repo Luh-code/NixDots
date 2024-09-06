@@ -61,7 +61,7 @@
         default = mkHost "default" "x86_64-linux" [
 	        ./hosts/shared/gpus/nvidia.nix
           ./hosts/shared/cpus/amd.nix
-          ./hosts/shared/kb-layouts/de_ge.nix
+          ./hosts/shared/kb-layouts/en_us.nix
           #./hosts/default/hyprland.nix
         ];
         laptop = mkHost "laptop" "x86_64-linux" [

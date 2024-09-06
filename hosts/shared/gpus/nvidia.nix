@@ -2,14 +2,16 @@
 
 {
   # Enable OpenGL
-  hardware.opengl.package = pkgs.mesa;
+  #hardware.graphics.package = pkgs.mesa;
 
   # config nvidia GPU
-  boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" ];
-  boot.kernelModules = [ "nouveau" ];
+  #boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" ];
+  #boot.kernelModules = [ "nouveau" ];
+  boot.kernelModules = [ "nvidia_uvm" "nvidia_modeset" "nvidia_drm" "nvidia" ];
   boot.kernelParams = [
-    "nouveau.config=NvGspRm=1"
-    "nouveau.debug=info,VBIOS=info,gsp=debug"
+    #"nouveau.config=NvGspRm=1"
+    #"nouveau.debug=info,VBIOS=info,gsp=debug"
+    "nvidia-drm.fbdev=1"
   ];
 
   # Load nvidia driver for Xorg and Wayland

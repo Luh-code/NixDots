@@ -2,6 +2,7 @@
 
 {
   stylix = {
+    enable = true;
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/helios.yaml";
@@ -27,6 +28,21 @@
       popups = 1.0;
     };
 
+    fonts = {
+      monospace = {
+        package = pkgs.nerdfonts.override {fonts = ["FiraMono"];};
+        name = "FiraMono Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+      serif = {
+        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        name = "FiraCode Nerd Font";
+      };
+    };
+
     targets.nixos-icons = {
       enable = false;
     };
@@ -38,7 +54,7 @@
 
     targets.nixvim = {
       enable = true;
-      transparent_bg.main = true; 
+      transparentBackground.main = true; 
     };
     targets.gtk.enable = true;
   };

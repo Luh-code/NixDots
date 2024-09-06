@@ -15,7 +15,8 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    settings = {
+    settings = { 
+      debug.disable_logs = "false";
       # set up environment variables
       env = 
         [
@@ -31,14 +32,18 @@ in
         kb_layout = "us";
         accel_profile = "flat";
         ## set up cursor
-        #cursor = {
-        #  no_hardware_cursors = true;
-        #};
+      };
+      cursor = {
+        no_hardware_cursors = "true";
+      };
+
+      misc = {
+        disable_hyprland_logo = "true";
       };
 
       exec-once = 
         [
-          "swww-daemon"
+          "sleep 5 ; swww-daemon"
           #"swww img ${pkgs.stylix.image}"
         ];
 

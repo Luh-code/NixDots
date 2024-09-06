@@ -23,9 +23,11 @@
     plugins = {
       bufferline = {
         enable = true;
-        showTabIndicators = true;
-        tabSize = 12;
-        alwaysShowBufferline = true;
+        settings.options = {
+          show_tab_indicators = true;
+          tab_size = 12;
+          always_show_bufferline = true;
+        };
       };
 
       tmux-navigator = {
@@ -56,21 +58,24 @@
 
       conform-nvim = {
         enable = true;
-        formatOnSave = {
-          lspFallback = true;
-          timeoutMs = 500;
-        };
-        formattersByFt = {
-          html = [["prettierd" "prettier"]];
-          css = [["prettierd" "prettier"]];
-          javascript = [["prettierd" "prettier"]];
-          javascriptreact = [["prettierd" "prettier"]];
-          python = [["black"]];
-          lua = [["stylua"]];
-          nix = [["alejandra"]];
-          markdown = [["prettierd" "prettier"]];
-          yaml = [["yamllint" "yamlfmt"]];
-          cpp = [["clang-format"]];
+        settings = {
+          format_on_save = {
+            lspFallback = true;
+            timeoutMs = 500;
+          };
+          formatters_by_ft = {
+            html = [["prettierd" "prettier"]];
+            css = [["prettierd" "prettier"]];
+            javascript = [["prettierd" "prettier"]];
+            javascriptreact = [["prettierd" "prettier"]];
+            python = [["black"]];
+            lua = [["stylua"]];
+            nix = [["alejandra"]];
+            markdown = [["prettierd" "prettier"]];
+            yaml = [["yamllint" "yamlfmt"]];
+            cpp = [["clang-format"]];
+            zig = [["zigfmt"]];
+          };
         };
       };
     
@@ -80,7 +85,7 @@
           eslint = {enable = true;};
           html = {enable = true;};
           lua-ls = {enable = true;};
-          nil_ls = {enable = true;};
+          nil-ls = {enable = true;};
           marksman = {enable = true;};
           pyright = {enable = true;};
           gopls = {enable = true;};
@@ -88,6 +93,7 @@
           tsserver = {enable = true;};
           yamlls = {enable = true;};
           clangd = {enable = true;};
+          zls = {enable = true;};
         };
       };
 

@@ -150,7 +150,7 @@ in
     inputs.swww.packages.${pkgs.system}.swww
     
     dolphin
-    cinnamon.nemo-with-extensions
+    nemo-with-extensions
     feh
     imlib2Full
     haruna
@@ -167,6 +167,9 @@ in
     libratbag
 
     keepassxc
+    blueman
+
+    zls
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;

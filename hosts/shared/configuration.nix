@@ -60,10 +60,10 @@ in
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    #driSupport = true;
+    enable32Bit = true;
   };
 
   services.xserver.enable = true;
@@ -111,7 +111,7 @@ in
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  #sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -174,7 +174,7 @@ in
   #fonts.packages = with pkgs; [ fira-code ];
   fonts.packages = with pkgs; [
     (pkgs.callPackage "${hmmp}/fonts/feather-font.nix" { })
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" "Iosevka" "JetBrainsMono" ]; })
   ]; 
 
   # Allow unfree packages
@@ -207,6 +207,7 @@ in
     base16-schemes
     exfat
     exfatprogs
+    egl-wayland
   ];
 
   #environment.variables.EDITOR = "neovim";
