@@ -36,6 +36,8 @@ in
     executable = true;
   };
 
+  wayland.windowManager.hyprland.xwayland.enable = true;
+
 
   # encode the file content in nix configuration file directly
   # home.file.".xxx".text = ''
@@ -120,15 +122,15 @@ in
     usbutils # lsusb
     #neovim
     #nixvim
-    discord
-    webcord
+    #discord
+    #webcord
+    vesktop
     pavucontrol
     obs-studio
-    #xdg-desktop-portal-wlr
-    xdg-desktop-portal-hyprland
     qt5Full
     gst_all_1.gstreamer
-    obs-studio-plugins.wlrobs
+    #xdg-desktop-portal-wlr
+    #obs-studio-plugins.wlrobs
     brave
     ranger
     steam
@@ -170,6 +172,12 @@ in
     blueman
 
     zls
+
+    jetbrains.idea-community
+    zulu17
+    mission-center
+    monitor
+    stacer
   ];
 
   #stylix.package = inputs.stylix.homeMangerModules.stylix;

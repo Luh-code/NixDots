@@ -45,6 +45,7 @@ in
         [
           "sleep 5 ; swww-daemon"
           #"swww img ${pkgs.stylix.image}"
+          "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         ];
 
       # set up monitors

@@ -55,6 +55,17 @@ in
   #  options = [ "rw" "uid=1000"];
   #};
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland
+    ];
+  };
+
+  programs.hyprland.enable = true;
+
   environment.variables = {
     WLR_NO_HARDWARE_CURSORS = "1";
   };
@@ -67,6 +78,8 @@ in
   };
 
   services.xserver.enable = true;
+
+  services.dbus.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -119,6 +132,7 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
 
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
@@ -208,6 +222,10 @@ in
     exfat
     exfatprogs
     egl-wayland
+    grim
+    slurp
+    obs-studio-plugins.wlrobs
+    xwayland
   ];
 
   #environment.variables.EDITOR = "neovim";
