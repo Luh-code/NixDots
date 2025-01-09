@@ -18,6 +18,7 @@
       update-channel = "sudo nix-channel --update";
       full-update = "update & udpate-channel";
       la = "eza -lA";
+      kimg = "/etc/nixos/modules/home-manager/zsh/kimg.sh";
     };
 
     # set up oh-my-zsh
