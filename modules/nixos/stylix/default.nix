@@ -30,7 +30,8 @@
 
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override {fonts = ["FiraMono"];};
+        package = pkgs.nerd-fonts.fira-mono;
+        #package = pkgs.nerdfonts.override {fonts = ["FiraMono"];};
         name = "FiraMono Nerd Font";
       };
       sansSerif = {
@@ -38,24 +39,30 @@
         name = "DejaVu Sans";
       };
       serif = {
-        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        #package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        package = pkgs.nerd-fonts.fira-code;
         name = "FiraCode Nerd Font";
       };
     };
 
-    targets.nixos-icons = {
-      enable = false;
-    };
+    targets = {
+      nixos-icons = {
+        enable = false;
+      };
 
-    targets.plymouth = {
-      enable = true;
-      logo = ./logos/nixos.svg;
-    };
+      plymouth = {
+        enable = true;
+        logo = ./logos/nixos.svg;
+      };
 
-    targets.nixvim = {
-      enable = true;
-      transparentBackground.main = true; 
+      nixvim = {
+        enable = true;
+        transparentBackground.main = true; 
+      };
+
+      gtk.enable = true;
+
+      #kitty.enable = true;
     };
-    targets.gtk.enable = true;
   };
 }
