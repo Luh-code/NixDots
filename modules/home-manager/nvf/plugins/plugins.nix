@@ -6,6 +6,7 @@
     ./gitsigns-nvim.nix
     #./which-key-nvim.nix
     ./neo-tree.nix
+    ./bufferline.nix
   ];
 }
 

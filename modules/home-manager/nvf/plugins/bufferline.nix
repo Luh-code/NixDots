@@ -1,12 +1,12 @@
 { pkgs, lib, ... }:
 
 {
-  vim.lazy.plugins."neo-tree.nvim" = { 
-    package = pkgs.vimPlugins.neo-tree-nvim;
-    setupModule = "neo-tree";
+  vim.lazy.plugins."bufferline.nvim" = { 
+    package = pkgs.vimPlugins.bufferline-nvim;
+    setupModule = "gitsigns";
     # set up plugin
     setupOpts = {
-      
+      termguicolors = true;
     };
     # lua initialization after setup
     after = ''
@@ -14,21 +14,16 @@
     '';
 
     # Explicitely mark the plugin as lazy. Not strictly required if triggers are defined
-    lazy = true;
+    lazy = false;
 
     # load on command
-    cmd = [ "Neotree" ];
+    cmd = [];
 
     # load on event
     event = [];
 
     # load on keymap
     keys = [
-      {
-        key = "<leader>t";
-        action = ":Neotree focus toggle<CR>";
-        mode = "n";
-      }
     ];
   };
 }
