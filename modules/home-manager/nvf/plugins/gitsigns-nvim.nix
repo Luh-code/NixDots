@@ -1,9 +1,9 @@
 { pkgs, lib, ... }:
 
 {
-  vim.lazy.plugins."aerial.nvim" = { 
-    package = pkgs.vimPlugins.aerial-nvim;
-    setupModule = "aerial";
+  vim.lazy.plugins."gitsigns.nvim" = { 
+    package = pkgs.vimPlugins.gitsigns-nvim;
+    setupModule = "gitsigns";
     # set up plugin
     setupOpts = {
       
@@ -14,19 +14,17 @@
     '';
 
     # Explicitely mark the plugin as lazy. Not strictly required if triggers are defined
-    lazy = true;
+    lazy = false;
 
     # load on command
-    cmd = ["AerialOpen"];
+    cmd = [];
 
     # load on event
-    event = ["BufEnter"];
+    event = [];
 
     # load on keymap
     keys = [
       {
-        key = "<leader>a";
-        action = ":AerialToggle<CR>";
       }
     ];
   };

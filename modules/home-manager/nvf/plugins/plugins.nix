@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./aerial.nix
+    ./aerial-nvim.nix
+    ./gitsigns-nvim.nix
   ];
 }
 
