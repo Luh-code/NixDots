@@ -10,6 +10,8 @@
       mouse_hide_wait = "-1.0";
       #background_opacity = "0.9";
       #background_blur = 0;
+      cursor_trail = 1;
+      allow_lignatures = true;
     };
   };
 }

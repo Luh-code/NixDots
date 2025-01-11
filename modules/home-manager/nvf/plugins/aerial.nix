@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 {
-  lazy.plugins."aerial.nvim" = { 
+  vim.lazy.plugins."aerial.nvim" = { 
     package = pkgs.vimPlugins.aerial-nvim;
     setupModule = "aerial";
     # set up plugin

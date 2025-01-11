@@ -27,7 +27,7 @@
       ts.enable = true;
       python.enable = true;
       zig.enable = true;
-      mardown.enable = true;
+      markdown.enable = true;
       html.enable = true;
       dart.enable = true;
       go.enable = true;

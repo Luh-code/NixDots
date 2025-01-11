@@ -15,11 +15,20 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    systemd.variables = ["--all"];
+    extraConfig = 
+    ''
+      submap = insert
+      bind = , Return, exec, wtype -m alt -P insert
+      bind = , Return, submap, reset
+      submap = reset
+    '';
     settings = { 
       debug.disable_logs = "false";
       # set up environment variables
       env = 
         [
+          "DISPLAY"
           "LIBVA_DRIVER_NAME,nvidia"
           "XDG_SESSION_TYPE,wayland"
           "GBM_BACKEND,nvidia-drm"
@@ -49,12 +58,16 @@ in
         ];
 
       # set up monitors
-      "$mon0" = "DP-3";
-      "$mon1" = "DP-4";
+      "$mon2" = "DP-4";
+      "$mon0" = "DP-2";
+      "$mon1" = "DP-3";
+      "$tab" = "HDMI-A-2";
       monitor =
         [
+          "$mon2, 3440x1440@165, 0x1080, 1"
           "$mon0, 1920x1080@144, 0x0, 1"
           "$mon1, 1920x1080@60, 1920x0, 1"
+          "$tab, 1920x1080@60, 3840x0, 1"
         ];
       # assign workspaces 1-5 to $mon0 and 6-10 to $mon1
       workspace = (
@@ -69,15 +82,16 @@ in
             in 
               [
                 #"${if ws == 10 then builtins.toString (0) else builtins.toString (ws)}, monitor:${if x < 5 then "$mon0" else "$mon1"}"
-                "${ws}, monitor:${if x < 5 then "$mon0" else "$mon1"}"
+                "${ws}, monitor:${if ws == "1" then "$mon0" else if ws == "9" then "$mon1" else "$mon2"}"
+                #${ws}, monitor:$mon2"
               ]
           )
-        10)
-      );
+          10)
+        );
 
       # set up bindings
       "$mod" = "SUPER";
-      "$term" = "alacritty";
+      "$term" = "kitty -o allow_remote_control=yes --listen-on unix:/tmp/kitty_remote_control";
       "$browser" = "floorp";
       "$explorer" = "dolphin";
       #"$menu" = "killall .wofi-wrapped & wofi --show drun";
@@ -96,14 +110,15 @@ in
           "$mod, v, togglefloating"
           "$mod, Minus, splitratio, -0.1"
           "$mod, Comma, splitratio, -0.1"
-          "$mod, Plus, splitratio, 0.1"
-          "$mod, Colon, splitratio, 0.1"
+          "$mod, Plus, splitratio, +0.1"
+          "$mod, Colon, splitratio, +0.1"
 
           # movement
           "$mod, h, movefocus, l"
           "$mod, j, movefocus, d"
           "$mod, k, movefocus, u"
           "$mod, l, movefocus, r"
+          "$mod, i, togglesplit"
 
           # app bindings
           "$mod, return, exec, $term"
@@ -113,8 +128,8 @@ in
           "$mod SHIFT, space, exec, $fsm"
 
           # utils
-          "$mod SHIFT, s, exec, grimblast --notify --cursor --freeze copysave area"
-          "$mod SHIFT ALT, s, exec, grimblast --notify --cursor --freeze copysave screen"
+          "$mod SHIFT, s, exec, grimblast --notify --freeze copysave area"
+          "$mod SHIFT ALT, s, exec, grimblast --notify --freeze copysave screen"
 
           # workspaces
           "$mod, mouse_down, workspace, e+1"
@@ -123,6 +138,18 @@ in
           # scratchpad
           "$mod, y, togglespecialworkspace, magic"
           "$mod SHIFT, y, movetoworkspace, special:magic"
+
+          # german sybols
+          "$mod, a, exec, wtype 'ä'"
+          "$mod, o, exec, wtype 'ö'"
+          "$mod, u, exec, wtype 'ü'"
+          "$mod, s, exec, wtype 'ß'"
+          "$mod SHIFT, a, exec, wtype 'Ä'"
+          "$mod SHIFT, o, exec, wtype 'Ö'"
+          "$mod SHIFT, u, exec, wtype 'Ü'"
+
+          # special keys
+          #"$mod, i, submap, insert"
         ]
         ++ (
           # workspaces
@@ -142,6 +169,16 @@ in
             )
           10)
       );
+      # submaps
+      #submap = {
+      #  insert = {
+      #    ", Return" = [
+      #      "exec, wtype -k insert -k return"
+      #      "submap, reset"
+      #    ]; 
+      #  };
+      #};
+
       # media controls
       bindl =
         [
@@ -229,13 +266,25 @@ in
           popups_ignorealpha = "0.6";
         };
 
-        # shadow options
-        drop_shadow = "true";
-        shadow_ignore_window = "true";
-        shadow_range = "20";
-        shadow_offset = "0 2";
-        shadow_render_power = "4";
-        "col.shadow" = lib.mkForce"rgba(0000002A)";
+        # shadow-options
+        shadow = {
+          enabled = "true";
+          ignore_window = "true";
+          range = "20";
+          offset = "0 2";
+          render_power = "4";
+          color = lib.mkForce"rgba(0000002A)";
+        }; 
+        "col.shadow" = lib.mkOverride 0 (
+          builtins.removeAttrs {} ["col.shadow"]
+        );
+
+        #drop_shadow = "true";
+        #shadow_ignore_window = "true";
+        #shadow_range = "20";
+        #shadow_offset = "0 2";
+        #shadow_render_power = "4";
+        #"col.shadow" = lib.mkForce"rgba(0000002A)";
 
         # Dimming
         dim_inactive = "true";
@@ -245,6 +294,9 @@ in
 
       windowrulev2 = 
         [
+          #"float,class:^(cyberpunk2077.exe)$"
+          #"size 75% 75%,class:^(cyberpunk2077.exe)$"
+
         ];
     };
   };

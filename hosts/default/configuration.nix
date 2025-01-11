@@ -15,6 +15,7 @@ in
 
       #"${scp}/configuration.nix"
       #"${scp}/nvidia.nix"
+      #./../../modules/home-manager/nvf/main.nix
     ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

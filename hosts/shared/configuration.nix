@@ -21,6 +21,9 @@ in
 
       #inputs.nixvim.homeManagerModules.nixvim
       # ./modules/neovim/neovim.nix
+
+      #"${hmmp}/nvf/main.nix"
+      "${nmp}/starship/default.nix"
     ];
 
   #programs.hyprland = {
@@ -36,6 +39,10 @@ in
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   hardware.bluetooth.enable = true;
+
+  environment.sessionVariables = {
+    LD_LIBRARY_PATH = "${pkgs.wayland}/lib:$LD_LIBRARY_PATH";
+  };
 
 
   # Bootloader.
@@ -68,6 +75,7 @@ in
 
   environment.variables = {
     WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_RENDERER = "vulkan";
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -117,6 +125,7 @@ in
   services.xserver.displayManager.lightdm.enable = false;
   services.xserver.desktopManager.plasma5.enable = false;
 
+  services.cloudflare-warp.enable = true;
 
   services.ratbagd.enable = true;
 
@@ -160,7 +169,7 @@ in
   users.users.luh = {
     isNormalUser = true;
     description = "Lasse Ulf Hüffler";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm" ];
     packages = with pkgs; [
       firefox
       kate
@@ -173,6 +182,8 @@ in
   };
 
   #services.hyprpaper.enable = true;
+
+  programs.adb.enable = true;
 
   programs.zsh.enable=true;
   users.users.luh.shell = pkgs.zsh;
@@ -188,7 +199,12 @@ in
   #fonts.packages = with pkgs; [ fira-code ];
   fonts.packages = with pkgs; [
     (pkgs.callPackage "${hmmp}/fonts/feather-font.nix" { })
-    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" "Iosevka" "JetBrainsMono" ]; })
+    #(nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" "Iosevka" "JetBrainsMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.iosevka
+    nerd-fonts.jetbrains-mono
   ]; 
 
   # Allow unfree packages
@@ -199,7 +215,7 @@ in
   environment.systemPackages = with pkgs; [
     #neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    git
+    gitFull
     curl
     zsh
     #inputs.helix.packages."${pkgs.system}".helix
@@ -225,7 +241,11 @@ in
     grim
     slurp
     obs-studio-plugins.wlrobs
+    wayland
+    waylandpp
     xwayland
+    #xlib
+    starship
   ];
 
   #environment.variables.EDITOR = "neovim";

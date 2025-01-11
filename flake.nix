@@ -1,3 +1,4 @@
+
 {
   description = "Nixos config flake";
 
@@ -14,10 +15,10 @@
     #home-manager-modules.url = "./modules/home-manager";
     #nixos-modules.url = "./modules/nixos";
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #nixvim = {
+    #  url = "github:nix-community/nixvim";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     hyprcursor.url = "github:hyprwm/hyprcursor";
     hypridle.url = "github:hyprwm/hypridle";
@@ -32,42 +33,95 @@
     };
 
     swww.url = "github:LGFae/swww";
+
+    "aerial.nvim".url = "github:stevearc/aerial.nvim";
+
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+
+      #inputs."aerial.nvim".follows = "aerial.nvim";
+    };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, nvf, ... }@inputs:
     let
-      mkHost = hostName: system: extraModules:
-        nixpkgs.lib.nixosSystem {
-          pkgs = import nixpkgs {
-            inherit system;
-            config = {
-               allowUnfree = true; 
+     customNeovim = 
+            nvf.lib.neovimConfiguration {
+              pkgs = nixpkgs.legacyPackages."x86_64-linux";
+              modules = [ ./modules/home-manager/nvf/main.nix ];
             };
+      mkHost = hostName: system: extraModules:
+        {
+          #packages.${system}.default = 
+          #  (nvf.lib.neovimConfiguration {
+          #    pkgs = import nixpkgs {
+          #      inherit system;
+          #      config = {allowUnfree = true;};
+          #    };
+          #    modules = [ ./modules/home-manager/nvf/main.nix ];
+          #  }).neovim;
+	  #packages.${system}.my-neovim = customNvim.neovim;
+        
+          sys = nixpkgs.lib.nixosSystem {
+            pkgs = import nixpkgs {
+              inherit system;
+              config = {
+                 allowUnfree = true; 
+              };
+            };
+            specialArgs = {
+              inherit inputs;
+            };
+            modules =
+              [
+                ./hosts/shared/configuration.nix
+                ./hosts/${hostName}/configuration.nix
+                #./hosts/${hostName}/home.nix
+                inputs.stylix.nixosModules.stylix
+                #nvf.nixosModules.default
+              ] ++ extraModules;
           };
-          specialArgs = {
-            inherit inputs;
-          };
-          modules =
-            [
-              ./hosts/shared/configuration.nix
-              ./hosts/${hostName}/configuration.nix
-              #./hosts/${hostName}/home.nix
-              inputs.stylix.nixosModules.stylix
-            ] ++ extraModules;
         };
     in
     {
+
+      
+      #customNeovim = 
+      #      nvf.lib.neovimConfiguration {
+      #        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      #        modules = [ ./modules/home-manager/nvf/main.nix ];
+      #      };
+
+      packages."x86_64-linux".my-neovim = customNeovim.neovim;
+
       nixosConfigurations = {
-        default = mkHost "default" "x86_64-linux" [
+        default = (mkHost "default" "x86_64-linux" [
 	        ./hosts/shared/gpus/nvidia.nix
           ./hosts/shared/cpus/amd.nix
           ./hosts/shared/kb-layouts/en_us.nix
           #./hosts/default/hyprland.nix
-        ];
-        laptop = mkHost "laptop" "x86_64-linux" [
+	  {environment.systemPackages = [customNeovim.neovim];}
+        ]).sys;
+        laptop = (mkHost "laptop" "x86_64-linux" [
 	        ./hosts/shared/kb-layouts/en_us.nix
 	        #./hosts/shared/gpus/nvidia.nix 
-        ];
+        ]).sys;
+       };
+
+      homeManagerConfigurations = {
+        default = {
+	  pkgs = nixpkgs.legacyPackages."x86_64-linux";
+
+	  specialArgs = {
+	    inherit inputs;
+	  };
+
+	  modules =
+	    [
+	      nvf.homeManagerModules.default
+	    ];
+        };
       };
     };
 }

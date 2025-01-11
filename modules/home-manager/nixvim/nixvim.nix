@@ -44,6 +44,10 @@
         };
       };
 
+      web-devicons = {
+        enable = true;
+      };
+
       which-key = {
         enable = true;
       };
@@ -53,6 +57,10 @@
       };
 
       chadtree = {
+        enable = true;
+      };
+
+      illuminate = {
         enable = true;
       };
 
@@ -84,17 +92,87 @@
         servers = {
           eslint = {enable = true;};
           html = {enable = true;};
-          lua-ls = {enable = true;};
-          nil-ls = {enable = true;};
+          lua_ls = {enable = true;};
+          nil_ls = {enable = true;};
           marksman = {enable = true;};
           pyright = {enable = true;};
           gopls = {enable = true;};
           terraformls = {enable = true;};
-          tsserver = {enable = true;};
+          ts_ls = {enable = true;};
           yamlls = {enable = true;};
           clangd = {enable = true;};
           zls = {enable = true;};
         };
+      };
+
+      cmp = {
+        enable = true;
+        autoEnableSources = true;
+        settings = {
+          sources = [
+            {name = "nvim_lsp";}
+            {name = "path";}
+            {name = "luasnip";}
+            {name = "buffer";}
+          ];
+          snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+          completion = {
+            #autocomplete = false;
+          };
+          mapping = {
+            "<Tab>" = ''
+                cmp.mapping(
+                  function(fallback)
+                    local luasnip = require("luasnip")
+                    if cmp.visible() then
+                      cmp.select_next_item()
+                    elseif luasnip.jumpable(1) then
+                      luasnip.jump(1)
+                    else
+                      fallback()
+                    end
+                  end,
+                  { "i", "s" }
+                )
+              '';
+            "<S-Tab>" = ''
+                cmp.mapping(
+                  function(fallback)
+                    local luasnip = require("luasnip")
+                    if cmp.visible() then
+                      cmp.select_prev_item()
+                    elseif luasnip.jumpable(-1) then
+                      luasnip.jump(-1)
+                    else
+                      fallback()
+                    end
+                  end,
+                  { "i", "s" }
+                )
+              '';
+            "<A-Tab>" = "cmp.mapping.close()";
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+            #modes = [ "i" "s" ];
+          };
+        };
+      };
+
+      none-ls = {
+        enable = true;
+        #sources.formatting.zigfmt.enable = true;
+      };
+
+      oil.enable = true;
+
+      treesitter.enable = true;
+
+      luasnip.enable = true;
+
+      lualine.enable = true;
+      
+      alpha = {
+        enable = true;
+        theme = "dashboard";
       };
 
       lspsaga = {

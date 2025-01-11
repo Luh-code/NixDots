@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   programs.git = {
@@ -9,6 +9,16 @@
       safe = {
         directory = "*";
       };
+      credential = {
+        helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+      };
+    };
+    aliases = {
+      ci = "commit";
+      co = "checkout";
+      s = "status";
     };
   };
 }

@@ -1,6 +1,8 @@
 { inputs, pkgs, ... }:
 
 {
-  enable = true;
-  settings = pkgs.lib.importTOML ./jetpack.toml;
+  programs.starship = {
+    enable = true;
+    settings = pkgs.lib.importTOML ./jetpack.toml;
+  };
 }

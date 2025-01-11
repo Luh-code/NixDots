@@ -5,6 +5,7 @@
     enable = true;
     enableCompletion = true;
     initExtra = ''
+      eval "$(starship init zsh)"
       eval "$(zoxide init zsh --cmd cd)"
       eval "$(sh /etc/nixos/tmux.sh)"
       LS_COLORS=$LS_COLORS:'tw=32' ; export LS_COLORS
@@ -26,6 +27,16 @@
       enable = true;
       plugins = [ "git" "thefuck" ];
       theme = "af-magic";
+    };
+
+    # set up zsh-autosuggestions
+    autosuggestion = {
+      enable = true;
+    };
+
+    # set up ssyntaxHighlighting
+    syntaxHighlighting = {
+      enable = true;
     };
   };
 }
