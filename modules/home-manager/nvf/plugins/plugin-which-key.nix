@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 {
-  vim.lazy.plugins."gitsigns.nvim" = { 
+  vim.lazy.plugins.".nvim" = { 
     package = pkgs.vimPlugins.gitsigns-nvim;
     setupModule = "gitsigns";
     # set up plugin
