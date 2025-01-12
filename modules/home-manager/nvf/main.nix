@@ -14,7 +14,41 @@
 
     statusline.lualine.enable = true;
     telescope.enable = true;
-    autocomplete.nvim-cmp.enable = true;
+    autocomplete.nvim-cmp = {
+      enable = true;
+      #sourcePlugins = [
+      #  "nvim-bufferline-lua"
+      #];
+    };
+
+    keymaps = [
+      {
+        mode = "i";
+        key = "<C-h>";
+        action = "<Left>";
+      }
+      {
+        mode = "i";
+        key = "<C-j>";
+        action = "<Down>";
+      }
+      {
+        mode = "i";
+        key = "<C-k>";
+        action = "<Up>";
+      }
+      {
+        mode = "i";
+        key = "<C-l>";
+        action = "<Right>";
+      }
+    ];
+
+    binds = {
+      cheatsheet = {
+        enable = true;
+      };
+    };
 
     languages = {
       enableLSP = true;

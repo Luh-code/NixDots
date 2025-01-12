@@ -8,7 +8,7 @@
     ./neo-tree.nix
     ./bufferline.nix
     #./luasnip.nix
-    ./tmux.nix
+    ./vim-tmux-navigator.nix
   ];
 }
 
