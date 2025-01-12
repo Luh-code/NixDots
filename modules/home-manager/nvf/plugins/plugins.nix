@@ -7,6 +7,8 @@
     #./which-key-nvim.nix
     ./neo-tree.nix
     ./bufferline.nix
+    #./luasnip.nix
+    ./tmux.nix
   ];
 }
 

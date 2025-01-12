@@ -1,29 +1,22 @@
 { pkgs, lib, ... }:
 
 {
-  vim.lazy.plugins."bufferline.nvim" = { 
-    package = pkgs.vimPlugins.bufferline-nvim;
-    setupModule = "gitsigns";
-    # set up plugin
+  vim.tabline.nvimBufferline = {
+    enable = true;
+
     setupOpts = {
-      termguicolors = true;
+      options = {
+        always_show_bufferline = true;
+        tab_size = 12;
+        seperator_style = "padded_slope";
+        style_preset = "no_italic";
+      };
     };
-    # lua initialization after setup
-    after = ''
-      
-    '';
 
-    # Explicitely mark the plugin as lazy. Not strictly required if triggers are defined
-    lazy = false;
-
-    # load on command
-    cmd = [];
-
-    # load on event
-    event = [];
-
-    # load on keymap
-    keys = [
-    ];
+    mappings = {
+      cycleNext = "<Tab>";
+      cyclePrevious = "<S-Tab>";
+      closeCurrent = "<leader><Tab>q";
+    };
   };
 }
