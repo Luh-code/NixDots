@@ -108,7 +108,7 @@ in {
 
     zls
 
-    #jetbrains.idea-community
+    jetbrains.idea-community
     zulu17
     #openjdk17-bootstrap
     monitor stacer

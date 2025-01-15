@@ -34,13 +34,28 @@
 
     swww.url = "github:LGFae/swww";
 
-    "aerial.nvim".url = "github:stevearc/aerial.nvim";
+    plugin-aerial-nvim = {
+      url = "github:stevearc/aerial.nvim";
+      flake = false; 
+    };
+
+    plugin-gitsigns-nvim = {
+      url = "github:lewis6991/gitsigns.nvim";
+      flake = false;
+    };
+
+    plugin-which-key = {
+      url = "github:folke/which-key.nvim";
+      flake = false;
+    };
 
     nvf = {
       url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-
-      #inputs."aerial.nvim".follows = "aerial.nvim";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        aerial-nvim.follows = "plugin-aerial-nvim";
+        gitsigns-nvim.follows = "plugin-gitsigns-nvim";
+      };
     };
   };
 

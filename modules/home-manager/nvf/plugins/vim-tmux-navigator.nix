@@ -3,7 +3,7 @@
 {
   vim.lazy.plugins."vim-tmux-navigator" = { 
     package = pkgs.vimPlugins.vim-tmux-navigator;
-    setupModule = "vim-tmux-navigator";
+    #setupModule = "vim-tmux-navigator";
     # set up plugin
     setupOpts = {
       
@@ -32,22 +32,22 @@
       {
         mode = "n";
         key = "<C-h>";
-        action = "<TmuxNavigateLeft>";
+        action = "<cmd><C-U>TmuxNavigateLeft<cr>";
       }
       {
         mode = "n";
         key = "<C-j>";
-        action = "<TmuxNavigateDown>";
+        action = "<cmd><C-U>TmuxNavigateDown<cr>";
       }
       {
         mode = "n";
         key = "<C-k>";
-        action = "<TmuxNavigateUp>";
+        action = "<cmd><C-U>TmuxNavigateUp<cr>";
       }
       {
         mode = "n";
         key = "<C-l>";
-        action = "<TmuxNavigateRight>";
+        action = "<cmd><C-U>TmuxNavigateRight<cr>";
       }
     ];
   };

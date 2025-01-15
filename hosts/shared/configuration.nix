@@ -248,7 +248,7 @@ in
     starship
   ];
 
-  #environment.variables.EDITOR = "neovim";
+  environment.variables.EDITOR = "nvim";
 
   #boot.extraModulePackages = with config.boot.kernelPackages; [ uinput ];
 

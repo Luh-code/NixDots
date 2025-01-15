@@ -24,7 +24,7 @@
 
     # set up oh-my-zsh
     oh-my-zsh = {
-      enable = true;
+      enable = false;
       plugins = [ "git" "thefuck" ];
       theme = "af-magic";
     };

@@ -12,35 +12,79 @@
       style = "dark";
     };
 
+    vimAlias = true;
+    viAlias = true;
+
     statusline.lualine.enable = true;
     telescope.enable = true;
     autocomplete.nvim-cmp = {
       enable = true;
-      #sourcePlugins = [
-      #  "nvim-bufferline-lua"
-      #];
     };
 
+    visuals.cinnamon-nvim.enable = true;
+
     keymaps = [
+      #{
+      #  mode = "i";
+      #  key = "<C-h>";
+      #  action = "<Left>";
+      #}
+      #{
+      #  mode = "i";
+      #  key = "<C-j>";
+      #  action = "<Down>";
+      #}
+      #{
+      #  mode = "i";
+      #  key = "<C-k>";
+      #  action = "<Up>";
+      #}
+      #{
+      #  mode = "i";
+      #  key = "<C-l>";
+      #  action = "<Right>";
+      #}
       {
-        mode = "i";
-        key = "<C-h>";
-        action = "<Left>";
+        mode = "n";
+        key = "<c-e>";
+        action = "3<Down>";
       }
       {
-        mode = "i";
-        key = "<C-j>";
-        action = "<Down>";
+        mode = "n";
+        key = "<c-q>";
+        action = "3<Up>";
       }
       {
-        mode = "i";
-        key = "<C-k>";
-        action = "<Up>";
+        mode = "n";
+        key = "<A-e>";
+        action = "<PageDown>";
+        noremap = false;
       }
       {
-        mode = "i";
-        key = "<C-l>";
-        action = "<Right>";
+        mode = "n";
+        key = "<A-e>";
+        action = "<PageUp>";
+        noremap = false;
+      }
+      {
+        mode = "n";
+        key = "<c-h>";
+        action = "<cmd>wincmd h<cr>";
+      }
+      {
+        mode = "n";
+        key = "<c-j>";
+        action = "<cmd>wincmd j<cr>";
+      }
+      {
+        mode = "n";
+        key = "<c-k>";
+        action = "<cmd>wincmd k<cr>";
+      }
+      {
+        mode = "n";
+        key = "<c-l>";
+        action = "<cmd>wincmd l<cr>";
       }
     ];
 
