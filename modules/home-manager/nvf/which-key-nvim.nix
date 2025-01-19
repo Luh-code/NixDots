@@ -1,9 +1,9 @@
 { pkgs, lib, ... }:
 
 {
-  vim.lazy.plugins.".nvim" = { 
-    package = pkgs.vimPlugins.gitsigns-nvim;
-    setupModule = "gitsigns";
+  vim.lazy.plugins."which-key.nvim" = { 
+    package = pkgs.vimPlugins.which-key-nvim;
+    setupModule = "which-key";
     # set up plugin
     setupOpts = {
       
@@ -14,7 +14,7 @@
     '';
 
     # Explicitely mark the plugin as lazy. Not strictly required if triggers are defined
-    lazy = false;
+    lazy = true;
 
     # load on command
     cmd = [];
@@ -24,6 +24,11 @@
 
     # load on keymap
     keys = [
+        { 
+                key = "<leader>?";
+                action = "<cmd>:lua require(\"which-key\").show({global = false})";
+                mode = "n";
+        }
     ];
   };
 }
