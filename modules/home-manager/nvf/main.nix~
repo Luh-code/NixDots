@@ -21,8 +21,7 @@
       enable = true;
     };
 
-    options.tabstop = 2;
-    options.shiftwidth = 2;
+    options.opt.tabstop = 2;
 
     visuals.cinnamon-nvim.enable = true;
 

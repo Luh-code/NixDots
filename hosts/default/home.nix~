@@ -151,8 +151,6 @@ in {
 
     kitty
     timg
-
-    inkscape
   ];
 
   home.file."jdks/zulu23".source = pkgs.zulu23;
