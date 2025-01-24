@@ -152,8 +152,11 @@ in {
     kitty
     timg
 
-    inkscape-with-extensions
-    inkscape-extensions.applytransforms
+    (pkgs.inkscape-with-extensions.override {
+      inkscapeExtensions = [
+        inkscape-extensions.applytransforms
+      ];
+    })
   ];
 
   home.file."jdks/zulu23".source = pkgs.zulu23;

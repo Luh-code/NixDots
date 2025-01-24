@@ -97,7 +97,9 @@ in {
 
     bibata-cursors
 
-    eww spotifyd bash (pkgs.callPackage "${hmmp}/fonts/feather-font.nix" { })
+    eww spotifyd bash 
+    (pkgs.callPackage "${hmmp}/fonts/feather-font.nix" { })
+    (pkgs.callPackage "${hmmp}/fonts/interceptor-font.nix" { })
     #(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" "JetBrainsMono" ]; })
    
     nerd-fonts.fira-code nerd-fonts.droid-sans-mono nerd-fonts.iosevka nerd-fonts.jetbrains-mono
