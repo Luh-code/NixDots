@@ -11,7 +11,7 @@ in {
       "${hmmp}/hyprland/default.nix" 
       "${hmmp}/wofi/default.nix"
       "${hmmp}/kitty/default.nix"
-      "${hmmp}/alvr/default.nix"
+      #"${hmmp}/alvr/default.nix"
       #"${hmmp}/nvf/main.nix"
       #"${hmmp}/swww/default.nix"
     ];
