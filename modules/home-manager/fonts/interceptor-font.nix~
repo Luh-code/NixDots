@@ -1,11 +1,15 @@
 { stdenv, pkgs }:
 
-let version = "1.0"; in
+let 
+  interceptorFont = builtins.path {
+    path = fonts/interceptor.zip;
+    name = "interceptor-font";
+  };
+in
 stdenv.mkDerivation {
-  version = "${version}";
-  name = "interceptor-${version}"; 
+  name = "interceptor-font"; 
 
-  src = ../../../resources/fonts/interceptor.zip;
+  src = interceptorFont;
 
   unpackPhase = ''
     runHook preUnpack

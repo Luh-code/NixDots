@@ -2,7 +2,7 @@
 
 let 
   interceptorFont = builtins.path {
-    path = ../../../resources/fonts/interceptor.zip;
+    path = fonts/interceptor.zip;
     name = "interceptor-font";
   };
 in
@@ -21,7 +21,7 @@ stdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/usr/local/share/fonts
-    install -m444 ./interceptor.ttf $out/usr/local/share/fonts
+    install -m444 ./Interceptor.otf $out/usr/local/share/fonts
   
     runHook postInstall
   '';

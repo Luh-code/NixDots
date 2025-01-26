@@ -11,6 +11,7 @@ in {
       "${hmmp}/hyprland/default.nix" 
       "${hmmp}/wofi/default.nix"
       "${hmmp}/kitty/default.nix"
+      "${hmmp}/alvr/default.nix"
       #"${hmmp}/nvf/main.nix"
       #"${hmmp}/swww/default.nix"
     ];
@@ -117,8 +118,6 @@ in {
 
     heroic wtype
 
-    alvr
-
     prismlauncher
 
     krita opentabletdriver
@@ -159,6 +158,7 @@ in {
         inkscape-extensions.applytransforms
       ];
     })
+    fontfinder
   ];
 
   home.file."jdks/zulu23".source = pkgs.zulu23;
