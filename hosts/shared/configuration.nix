@@ -8,6 +8,8 @@ let
   hmmp = home-manager-module-path;
 
   currentDirectory = builtins.getEnv "PWD";
+
+  r8125 = pkgs.callPackage ./drivers/r8125.nix { kernel = config.boot.KernelPackges.kernel; };
 in
 {
   environment.etc."debug-current-directory".text = currentDirectory;
@@ -246,11 +248,19 @@ in
     xwayland
     #xlib
     starship
+    monado-vulkan-layers
+
+    #linuxKernel.packages.linux_zen.r8125
+    ethtool
   ];
 
   environment.variables.EDITOR = "nvim";
 
-  #boot.extraModulePackages = with config.boot.kernelPackages; [ uinput ];
+  boot.extraModulePackages = [ r8125 ];
+
+  boot.blacklistedKernelModules = [ "r8169" ];
+
+  boot.kernelModules = [ r8125 ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
