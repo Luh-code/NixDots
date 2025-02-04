@@ -9,7 +9,7 @@ let
 
   currentDirectory = builtins.getEnv "PWD";
 
-  r8125 = pkgs.callPackage ./drivers/r8125.nix { kernel = config.boot.KernelPackges.kernel; };
+  r8125 = pkgs.callPackage ./drivers/r8125.nix { kernel = config.boot.kernelPackages.kernel; };
 in
 {
   environment.etc."debug-current-directory".text = currentDirectory;
@@ -260,7 +260,7 @@ in
 
   boot.blacklistedKernelModules = [ "r8169" ];
 
-  boot.kernelModules = [ r8125 ];
+  boot.kernelModules = [ "r8125" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
