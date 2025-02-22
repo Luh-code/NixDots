@@ -50,11 +50,11 @@
     };
 
     nvf = {
-      url = "github:notashelf/nvf";
+      url = "github:notashelf/nvf?rev=18bf52e540c745deb2c50fe3967cbe229a70bfe4";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        aerial-nvim.follows = "plugin-aerial-nvim";
-        gitsigns-nvim.follows = "plugin-gitsigns-nvim";
+        #aerial-nvim.follows = "plugin-aerial-nvim";
+        #gitsigns-nvim.follows = "plugin-gitsigns-nvim";
       };
     };
   };

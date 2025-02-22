@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./aerial-nvim.nix
+    #./aerial-nvim.nix
     ./gitsigns-nvim.nix
-    ./which-key-nvim.nix
+    #./which-key-nvim.nix
     ./neo-tree.nix
     ./bufferline.nix
     #./luasnip.nix

@@ -256,11 +256,11 @@ in
 
   environment.variables.EDITOR = "nvim";
 
-  boot.extraModulePackages = [ r8125 ];
+  #boot.extraModulePackages = [ r8125 ];
 
   boot.blacklistedKernelModules = [ "r8169" ];
 
-  boot.kernelModules = [ "r8125" ];
+  #boot.kernelModules = [ "r8125" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

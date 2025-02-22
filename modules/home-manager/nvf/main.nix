@@ -107,10 +107,10 @@
       clang.enable = true;
       ts.enable = true;
       python.enable = true;
-      zig.enable = true;
+      zig.enable= true;
       markdown.enable = true;
       html.enable = true;
-      dart.enable = true;
+      dart.enable = false;
       go.enable = true;
       lua.enable = true;
       php.enable = true;

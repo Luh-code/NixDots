@@ -80,9 +80,14 @@ in {
     # system tools
     sysstat lm_sensors # for `sensors` command ethtool pciutils # lspci usbutils # lsusb
     #neovim nixvim discord webcord
-    vesktop pavucontrol obs-studio qt5Full gst_all_1.gstreamer
+    pavucontrol obs-studio qt5Full gst_all_1.gstreamer
     #xdg-desktop-portal-wlr obs-studio-plugins.wlrobs
     brave ranger steam spotify meson ninja gcc
+
+    (discord.override {
+      withOpenASAR = true; # can do this here too
+      withVencord = true;
+    })
 
     xclip
 
